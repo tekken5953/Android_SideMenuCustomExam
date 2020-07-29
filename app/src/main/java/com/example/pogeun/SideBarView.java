@@ -1,4 +1,4 @@
-package com.example.sidemenucustomexam;
+package com.example.pogeun;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
