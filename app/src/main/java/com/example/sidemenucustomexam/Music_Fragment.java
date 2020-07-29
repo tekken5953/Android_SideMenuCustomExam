@@ -76,7 +76,6 @@ public class Music_Fragment extends Fragment {
             public void onItemClick(View v, int position) {
                 Intent intent = new Intent(getActivity(), PlayerActivity.class);
                 intent.putExtra("index", position);
-                back_main = "player";
                 startActivity(intent);
             }
         });

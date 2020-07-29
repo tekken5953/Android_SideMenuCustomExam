@@ -172,7 +172,6 @@ public class PlayerActivity extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         mediaPlayer.stop();
                         if (count < fields.length - 1) {
-                            Log.i("endsong", "곡 끝남 다음곡 진행");
                             count++;
                             changeMusic();
                             mediaPlayer.start();
