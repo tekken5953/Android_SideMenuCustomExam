@@ -1,6 +1,5 @@
 package com.example.sidemenucustomexam;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -38,24 +37,29 @@ public class PlayerActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.parseColor("#353433"));
         }
-        play_btn = (ImageView) findViewById(R.id.playbtn);
-        next_btn = (ImageView) findViewById(R.id.nextbtn);
-        previous_btn = (ImageView) findViewById(R.id.previousbtn);
-        music_img = (ImageView) findViewById(R.id.musicimg);
-        music_tx = (TextView) findViewById(R.id.musictx);
-        backpress = (ImageView) findViewById(R.id.backpress);
+        play_btn = findViewById(R.id.playbtn);
+        next_btn = findViewById(R.id.nextbtn);
+        previous_btn = findViewById(R.id.previousbtn);
+        music_img = findViewById(R.id.musicimg);
+        music_tx = findViewById(R.id.musictx);
+        backpress = findViewById(R.id.backpress);
         count = Objects.requireNonNull(getIntent().getExtras()).getInt("index");
         resID = getResources().getIdentifier(fields[count].getName(), "raw", getPackageName());
         imgID = getResources().getIdentifier(fields[count].getName(), "drawable", getPackageName());
-        seekBar = (SeekBar) findViewById(R.id.seekbar);
+        seekBar = findViewById(R.id.seekbar);
         mediaPlayer = MediaPlayer.create(PlayerActivity.this, resID);
         play_btn.setImageResource(R.drawable.pauseimg);
         resizeImg();
         translateText();
         music_tx.setText(music_name);
-        mediaPlayer.start();
-        seekBar.setMax(mediaPlayer.getDuration());
-        thread();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.start();
+                seekBar.setMax(mediaPlayer.getDuration());
+                thread();
+            }
+        }, 1000);
 
         backpress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +72,14 @@ public class PlayerActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(fromUser)  // 사용자가 시크바를 움직이면
+                if (fromUser)  // 사용자가 시크바를 움직이면
                     mediaPlayer.seekTo(progress);   // 재생위치를 바꿔준다(움직인 곳에서의 음악재생)
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -209,22 +215,22 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
-      public void thread() {
-          new Thread(new Runnable(){  // 쓰레드 생성
-              @Override
-              public void run() {
-                  while(mediaPlayer.isPlaying()){  // 음악이 실행중일때 계속 돌아가게 함
-                      try{
-                          Thread.sleep(1000); // 1초마다 시크바 움직이게 함
-                      } catch(Exception e){
-                          e.printStackTrace();
-                      }
-                      // 현재 재생중인 위치를 가져와 시크바에 적용
-                      seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                  }
-              }
-          }).start();
-      }
+    public void thread() {
+        new Thread(new Runnable() {  // 쓰레드 생성
+            @Override
+            public void run() {
+                while (mediaPlayer.isPlaying()) {  // 음악이 실행중일때 계속 돌아가게 함
+                    try {
+                        Thread.sleep(1000); // 1초마다 시크바 움직이게 함
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    // 현재 재생중인 위치를 가져와 시크바에 적용
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                }
+            }
+        }).start();
+    }
 
     @Override
     public void onBackPressed() {

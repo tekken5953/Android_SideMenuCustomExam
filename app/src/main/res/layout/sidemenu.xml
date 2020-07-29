@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:src="@drawable/clear"
-            android:tint="@color/contents"/>
+            android:tint="@color/contents" />
 
         <ImageView
             android:id="@+id/option_img"
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="1번 액티비티"
+                        android:text="홈 화면"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -108,64 +108,64 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/plus" />
+                        android:src="@drawable/arrow" />
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/child_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/child_layout"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:visibility="gone">-->
 
-                    <TextView
-                        android:id="@+id/child1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="1번 액티비티 하위 메뉴1"
-                        android:textColor="@color/line" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/child1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginLeft="20dp"-->
+                <!--                        android:text="1번 액티비티 하위 메뉴1"-->
+                <!--                        android:textColor="@color/line" />-->
 
-                    <View
-                        android:id="@+id/childline1_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child1"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/childline1_1"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/child1"-->
+                <!--                        android:layout_marginTop="15dp"-->
+                <!--                        android:background="@android:color/darker_gray"-->
+                <!--                        android:scaleX="0.9" />-->
 
-                    <TextView
-                        android:id="@+id/child1_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline1_1"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:text="1번 액티비티 하위 메뉴2"
-                        android:textColor="@color/line" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/child1_2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_below="@+id/childline1_1"-->
+                <!--                        android:layout_marginLeft="20dp"-->
+                <!--                        android:layout_marginTop="15dp"-->
+                <!--                        android:text="1번 액티비티 하위 메뉴2"-->
+                <!--                        android:textColor="@color/line" />-->
 
-                    <View
-                        android:id="@+id/childline1_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child1_2"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/childline1_2"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/child1_2"-->
+                <!--                        android:layout_marginTop="15dp"-->
+                <!--                        android:background="@android:color/darker_gray"-->
+                <!--                        android:scaleX="0.9" />-->
 
-                    <TextView
-                        android:id="@+id/child1_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline1_2"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="1번 액티비티 하위 메뉴3"
-                        android:textColor="@color/line" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/child1_3"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_below="@+id/childline1_2"-->
+                <!--                        android:layout_marginLeft="20dp"-->
+                <!--                        android:layout_marginTop="15dp"-->
+                <!--                        android:layout_marginBottom="20dp"-->
+                <!--                        android:text="1번 액티비티 하위 메뉴3"-->
+                <!--                        android:textColor="@color/line" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
                 <FrameLayout
                     android:id="@+id/first_activity_child"
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="2번 액티비티"
+                        android:text="뮤직 화면"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -194,62 +194,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/plus" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/child_layout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/child2_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="2번 액티비티 하위 메뉴1"
-                        android:textColor="@color/line" />
-
-                    <View
-                        android:id="@+id/childline2_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child2_1"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
-
-                    <TextView
-                        android:id="@+id/child2_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline2_1"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:text="2번 액티비티 하위 메뉴2"
-                        android:textColor="@color/line" />
-
-                    <View
-                        android:id="@+id/childline2_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child2_2"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
-
-                    <TextView
-                        android:id="@+id/child2_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline2_2"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="2번 액티비티 하위 메뉴3"
-                        android:textColor="@color/line" />
+                        android:src="@drawable/arrow" />
 
                 </RelativeLayout>
 
@@ -269,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="3번 액티비티"
+                        android:text="알람 화면"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -279,62 +224,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/plus" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/child_layout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/child3_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="3번 액티비티 하위 메뉴1"
-                        android:textColor="@color/line" />
-
-                    <View
-                        android:id="@+id/childline3_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child3_1"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
-
-                    <TextView
-                        android:id="@+id/child3_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline3_1"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:text="3번 액티비티 하위 메뉴2"
-                        android:textColor="@color/line" />
-
-                    <View
-                        android:id="@+id/childline3_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/child3_2"
-                        android:layout_marginTop="15dp"
-                        android:background="@android:color/darker_gray"
-                        android:scaleX="0.9" />
-
-                    <TextView
-                        android:id="@+id/child3_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childline3_2"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="3번 액티비티 하위 메뉴3"
-                        android:textColor="@color/line" />
+                        android:src="@drawable/arrow" />
 
                 </RelativeLayout>
 
@@ -352,10 +242,10 @@
 
     <RelativeLayout
         android:id="@+id/ccc"
-        android:background="@color/title_color"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/title_color">
 
         <ImageView
             android:id="@+id/share"
@@ -365,7 +255,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:src="@drawable/share"
-            android:tint="@color/contents"/>
+            android:tint="@color/contents" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MyPage_Fragment fragment5 = new MyPage_Fragment();
     private BottomNavigationView bottomNavigationView;
 
-    RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3, add_layout1, add_layout2, add_layout3;
+    RelativeLayout add_layout1, add_layout2, add_layout3;
     ImageView add_btn1, add_btn2, add_btn3, share, option, user_icon;
     String end_str = "뒤로가기를 한번 더 누르시면\n앱이 종료됩니다.";
     String share_str = "공유할수 없는 환경입니다.";
@@ -77,7 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }, 2000);
                     }
                 }
-            }else{
+            }else if(fragment.isVisible() && fragment.equals(fragment5)){
+                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
+            }
+            else{
                 bottomNavigationView.setSelectedItemId(R.id.bottom_home);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
             }
@@ -92,9 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         init();
         addSideView();  //사이드바 add
-        relativeLayout1 = findViewById(R.id.child_layout);
-        relativeLayout2 = findViewById(R.id.child_layout2);
-        relativeLayout3 = findViewById(R.id.child_layout3);
         add_btn1 = findViewById(R.id.add_img1);
         add_btn2 = findViewById(R.id.add_img2);
         add_btn3 = findViewById(R.id.add_img3);
@@ -163,36 +164,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void btnChild1() {
-
-                if (relativeLayout1.getVisibility() == View.GONE) {
-                    add_btn1.setImageResource(R.drawable.minus);
-                    relativeLayout1.setVisibility(View.VISIBLE);
-                } else {
-                    add_btn1.setImageResource(R.drawable.plus);
-                    relativeLayout1.setVisibility(View.GONE);
-                }
+                closeMenu();
+                bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment1).commitAllowingStateLoss();
             }
 
             @Override
             public void btnChild2() {
-                if (relativeLayout2.getVisibility() == View.GONE) {
-                    add_btn2.setImageResource(R.drawable.minus);
-                    relativeLayout2.setVisibility(View.VISIBLE);
-                } else {
-                    add_btn2.setImageResource(R.drawable.plus);
-                    relativeLayout2.setVisibility(View.GONE);
-                }
+                closeMenu();
+                bottomNavigationView.setSelectedItemId(R.id.bottom_music);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment2).commitAllowingStateLoss();
             }
 
             @Override
             public void btnChild3() {
-                if (relativeLayout3.getVisibility() == View.GONE) {
-                    add_btn3.setImageResource(R.drawable.minus);
-                    relativeLayout3.setVisibility(View.VISIBLE);
-                } else {
-                    add_btn3.setImageResource(R.drawable.plus);
-                    relativeLayout3.setVisibility(View.GONE);
-                }
+                closeMenu();
+                bottomNavigationView.setSelectedItemId(R.id.bottom_alarm);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment3).commitAllowingStateLoss();
             }
 
             @Override
@@ -241,7 +229,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (back_main.getText().toString().equals("music")){
             bottomNavigationView.setSelectedItemId(R.id.bottom_music);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
-        }else{
+        }
+        else{
             bottomNavigationView.setSelectedItemId(R.id.bottom_home);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
         }

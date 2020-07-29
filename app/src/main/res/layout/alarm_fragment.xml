@@ -3,10 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#Alarm Page"
-        android:layout_centerInParent="true"/>
+        android:headerBackground="@color/title_color"
+        android:numbersSelectorColor="@color/title_color"
+        android:numbersBackgroundColor="@color/contents"
+        android:id="@+id/time_picker"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알람 추가"
+        android:id="@+id/add_alarm"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="100dp"
+        android:background="@drawable/toast_msg"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재시간 보기"
+        android:id="@+id/current_time"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/toast_msg"
+        android:layout_toRightOf="@+id/add_alarm"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_picker"
+        android:layout_above="@+id/add_alarm"
+        android:orientation="vertical"
+        android:id="@+id/alarm_linear"
+        android:layout_margin="15dp"/>
 
 </RelativeLayout>
