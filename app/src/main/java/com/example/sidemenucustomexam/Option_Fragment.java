@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,13 @@ import androidx.fragment.app.Fragment;
 public class Option_Fragment extends Fragment {
 
     ViewGroup viewGroup;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView text = getActivity().findViewById(R.id.change_btn);
+        text.setText("Option Fragment");
+    }
 
     @Nullable
     @Override

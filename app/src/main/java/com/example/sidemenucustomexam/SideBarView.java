@@ -23,7 +23,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
         void btnChild3();
         void share();
         void option();
-        void mypage();
+        void my_page();
     }
 
     public SideBarView(Context context) {
@@ -36,7 +36,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
     }
 
     private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.layout_side, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.sidemenu, this, true);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_side_level_1).setOnClickListener(this);
         findViewById(R.id.btn_side_level_2).setOnClickListener(this);
@@ -70,7 +70,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
                 listener.option();
                 break;
             case R.id.user_icon:
-                listener.mypage();
+                listener.my_page();
             default:
                 break;
         }

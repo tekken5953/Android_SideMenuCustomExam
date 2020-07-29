@@ -32,10 +32,19 @@
                 android:text="@string/app_name"
                 android:textColor="@color/contents"
                 android:layout_centerInParent="true"
-                android:textSize="22sp"
-                android:typeface="serif"/>
+                android:textSize="25sp"
+                android:typeface="serif"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="change"
+            android:id="@+id/change_btn"
+            android:layout_below="@+id/rl_001"/>
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -45,7 +54,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_below="@+id/rl_001"
+            android:layout_below="@+id/change_btn"
             android:layout_above="@+id/navigationView"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

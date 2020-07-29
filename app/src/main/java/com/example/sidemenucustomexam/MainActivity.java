@@ -11,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -51,24 +54,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (isMenuShow) {
-            closeMenu();
-        } else {
-            if (isExitFlag) {
-                finish();
-            } else {
-                isExitFlag = true;
-                Toast.makeText(this, "뒤로가기를 한번더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        isExitFlag = false;
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment.isVisible() && fragment.equals(fragment1)) {
+                if (isMenuShow) {
+                    closeMenu();
+                } else {
+                    if (isExitFlag) {
+                        finish();
+                    } else {
+                        isExitFlag = true;
+                        Toast.makeText(this, "뒤로가기를 한번더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                isExitFlag = false;
+                            }
+                        }, 2000);
                     }
-                }, 2000);
+                }
+            }else{
+                bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
             }
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void mypage() {
+            public void my_page() {
                 closeMenu();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_option);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment5).commitAllowingStateLoss();

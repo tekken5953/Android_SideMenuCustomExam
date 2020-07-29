@@ -1,9 +1,13 @@
 package com.example.sidemenucustomexam;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +20,8 @@ public class Home_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        TextView textView = getActivity().findViewById(R.id.home_fragment_tx);
-        textView.setText("홈 화면");
+        TextView text = getActivity().findViewById(R.id.change_btn);
+        text.setText("Home Fragment");
     }
 
     @Nullable
@@ -28,4 +31,5 @@ public class Home_Fragment extends Fragment {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.home_fragment, container, false);
         return viewGroup;
     }
+
 }

@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#Home Page"
-        android:id="@+id/home_fragment_tx"
+        android:id="@+id/home_tx"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>
