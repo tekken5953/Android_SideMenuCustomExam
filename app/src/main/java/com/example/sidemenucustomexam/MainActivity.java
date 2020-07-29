@@ -1,9 +1,7 @@
 package com.example.sidemenucustomexam;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,14 +30,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean isMenuShow = false;
     private Boolean isExitFlag = false;
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private Fragment1 fragment1 = new Fragment1();
-    private Fragment2 fragment2 = new Fragment2();
-    private Fragment3 fragment3 = new Fragment3();
-    private Fragment4 fragment4 = new Fragment4();
+    private Home_Fragment fragment1 = new Home_Fragment();
+    private Music_Fragment fragment2 = new Music_Fragment();
+    private Alarm_Fragment fragment3 = new Alarm_Fragment();
+    private Option_Fragment fragment4 = new Option_Fragment();
+    private MyPage_Fragment fragment5 = new MyPage_Fragment();
     private BottomNavigationView bottomNavigationView;
 
     RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3, add_layout1, add_layout2, add_layout3;
-    ImageView add_btn1, add_btn2, add_btn3, share, option;
+    ImageView add_btn1, add_btn2, add_btn3, share, option, user_icon;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add_layout3 = findViewById(R.id.btn_side_level_3);
         share = findViewById(R.id.share);
         option = findViewById(R.id.option_img);
+        user_icon = findViewById(R.id.user_icon);
 
         bottomNavigationView = findViewById(R.id.navigationView);
         // 첫화면에 띄워야 할 것들 지정해주기
@@ -202,6 +202,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 closeMenu();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_option);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
+            }
+
+            @Override
+            public void mypage() {
+                closeMenu();
+                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment5).commitAllowingStateLoss();
             }
         });
     }

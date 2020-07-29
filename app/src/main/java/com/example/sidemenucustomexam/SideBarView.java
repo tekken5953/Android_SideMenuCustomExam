@@ -23,6 +23,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
         void btnChild3();
         void share();
         void option();
+        void mypage();
     }
 
     public SideBarView(Context context) {
@@ -42,6 +43,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
         findViewById(R.id.btn_side_level_3).setOnClickListener(this);
         findViewById(R.id.share).setOnClickListener(this);
         findViewById(R.id.option_img).setOnClickListener(this);
+        findViewById(R.id.user_icon).setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +69,8 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
             case R.id.option_img:
                 listener.option();
                 break;
+            case R.id.user_icon:
+                listener.mypage();
             default:
                 break;
         }
