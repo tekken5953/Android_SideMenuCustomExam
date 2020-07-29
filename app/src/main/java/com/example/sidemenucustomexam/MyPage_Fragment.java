@@ -17,8 +17,6 @@ public class MyPage_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView text = getActivity().findViewById(R.id.change_btn);
-        text.setText("User Info Fragment");
     }
 
     @Nullable

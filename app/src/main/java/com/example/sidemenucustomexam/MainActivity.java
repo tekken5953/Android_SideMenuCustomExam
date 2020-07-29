@@ -2,28 +2,29 @@ package com.example.sidemenucustomexam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext = MainActivity.this;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3, add_layout1, add_layout2, add_layout3;
     ImageView add_btn1, add_btn2, add_btn3, share, option, user_icon;
+    String end_str = "뒤로가기를 한번 더 누르시면\n앱이 종료됩니다.";
+    String share_str = "공유할수 없는 환경입니다.";
+    TextView back_main;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -63,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         finish();
                     } else {
                         isExitFlag = true;
-                        Toast.makeText(this, "뒤로가기를 한번더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+
+                        toastMsg(end_str);
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         share = findViewById(R.id.share);
         option = findViewById(R.id.option_img);
         user_icon = findViewById(R.id.user_icon);
+        back_main = findViewById(R.id.change_btn);
 
         bottomNavigationView = findViewById(R.id.navigationView);
         // 첫화면에 띄워야 할 것들 지정해주기
@@ -201,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     closeMenu();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(mContext, "공유할수 없는 환경입니다", Toast.LENGTH_SHORT).show();
+                    toastMsg(share_str);
                     closeMenu();
                 }
             }
@@ -229,6 +235,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (back_main.getText().toString().equals("music")){
+            bottomNavigationView.setSelectedItemId(R.id.bottom_music);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
+        }else{
+            bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
+        }
+    }
+
     public void closeMenu() {
         isMenuShow = false;
         Animation slide = AnimationUtils.loadAnimation(mContext, R.anim.sidebar_hidden);
@@ -250,5 +268,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewLayout.setVisibility(View.VISIBLE);
         viewLayout.setEnabled(true);
         mainLayout.setEnabled(false);
+    }
+
+    public void toastMsg(String s) {
+        final LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        final TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(MainActivity.this);
+        text.setTextSize(13);
+        text.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 600);
+        toast.setView(layout);
+        text.setText(s);
+        toast.show();
     }
 }

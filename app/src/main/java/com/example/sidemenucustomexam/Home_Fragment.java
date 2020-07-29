@@ -20,8 +20,6 @@ public class Home_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView text = getActivity().findViewById(R.id.change_btn);
-        text.setText("Home Fragment");
     }
 
     @Nullable
