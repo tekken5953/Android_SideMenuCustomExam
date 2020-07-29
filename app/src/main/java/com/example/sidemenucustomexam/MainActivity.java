@@ -3,9 +3,12 @@ package com.example.sidemenucustomexam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -14,15 +17,29 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext = MainActivity.this;
     private ViewGroup mainLayout;   //사이드 나왔을때 클릭방지할 영역
     private ViewGroup viewLayout;   //전체 감싸는 영역
     private ViewGroup sideLayout;   //사이드바만 감싸는 영역
     private Boolean isMenuShow = false;
     private Boolean isExitFlag = false;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Fragment1 fragment1 = new Fragment1();
+    private Fragment2 fragment2 = new Fragment2();
+    private Fragment3 fragment3 = new Fragment3();
+    private Fragment4 fragment4 = new Fragment4();
+    private BottomNavigationView bottomNavigationView;
+
     RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3, add_layout1, add_layout2, add_layout3;
-    ImageView add_btn1, add_btn2, add_btn3,share,option;
+    ImageView add_btn1, add_btn2, add_btn3, share, option;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -56,20 +73,53 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.title_color));
+        }
         setContentView(R.layout.activity_main);
         init();
         addSideView();  //사이드바 add
-        relativeLayout1 = (RelativeLayout) findViewById(R.id.child_layout);
-        relativeLayout2 = (RelativeLayout) findViewById(R.id.child_layout2);
-        relativeLayout3 = (RelativeLayout) findViewById(R.id.child_layout3);
-        add_btn1 = (ImageView) findViewById(R.id.add_img1);
-        add_btn2 = (ImageView) findViewById(R.id.add_img2);
-        add_btn3 = (ImageView) findViewById(R.id.add_img3);
-        add_layout1 = (RelativeLayout) findViewById(R.id.btn_side_level_1);
-        add_layout2 = (RelativeLayout) findViewById(R.id.btn_side_level_2);
-        add_layout3 = (RelativeLayout) findViewById(R.id.btn_side_level_3);
-        share = (ImageView) findViewById(R.id.share);
-        option = (ImageView) findViewById(R.id.option_img);
+        relativeLayout1 = findViewById(R.id.child_layout);
+        relativeLayout2 = findViewById(R.id.child_layout2);
+        relativeLayout3 = findViewById(R.id.child_layout3);
+        add_btn1 = findViewById(R.id.add_img1);
+        add_btn2 = findViewById(R.id.add_img2);
+        add_btn3 = findViewById(R.id.add_img3);
+        add_layout1 = findViewById(R.id.btn_side_level_1);
+        add_layout2 = findViewById(R.id.btn_side_level_2);
+        add_layout3 = findViewById(R.id.btn_side_level_3);
+        share = findViewById(R.id.share);
+        option = findViewById(R.id.option_img);
+
+        bottomNavigationView = findViewById(R.id.navigationView);
+        // 첫화면에 띄워야 할 것들 지정해주기
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
+        //바텀 네비게이션뷰 안의 아이템들 설정
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                switch (item.getItemId()) {
+                    case R.id.bottom_home: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.bottom_music: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.bottom_alarm: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.bottom_option: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     private void init() {
@@ -132,15 +182,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void share() {
-                try{
+                try {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     String text = "이것을 공유합니다";
                     intent.putExtra(Intent.EXTRA_TEXT, text);
-                    Intent chooser = Intent.createChooser(intent,"친구에게 공유하기");
+                    Intent chooser = Intent.createChooser(intent, "친구에게 공유하기");
                     startActivity(chooser);
                     closeMenu();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(mContext, "공유할수 없는 환경입니다", Toast.LENGTH_SHORT).show();
                     closeMenu();
@@ -150,10 +200,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             @Override
             public void option() {
                 closeMenu();
-                Intent intent = new Intent(MainActivity.this, OptionActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                finish();
+                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
             }
         });
     }

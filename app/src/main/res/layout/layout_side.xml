@@ -8,16 +8,18 @@
     <RelativeLayout
         android:id="@+id/bbb"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <ImageButton
+        android:layout_height="60dp"
+        android:background="@color/title_color">
+
+        <ImageView
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:backgroundTint="@android:color/black"
-            android:background="@drawable/clear" />
+            android:src="@drawable/clear"
+            android:tint="@color/contents" />
 
         <ImageView
             android:id="@+id/option_img"
@@ -26,75 +28,76 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/btn_cancel"
-            android:tint="@android:color/black"
-            android:src="@drawable/optioin_img" />
+            android:src="@drawable/option"
+            android:tint="@color/contents" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
             android:layout_alignParentBottom="true"
-            android:background="#202735" />
+            android:background="@color/line" />
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/ddd"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/ccc"
-        android:layout_below="@+id/bbb">
+        android:layout_below="@+id/bbb"
+        android:scrollbarSize="0dp">
 
         <RelativeLayout
-            android:id="@+id/aaa"
+            android:id="@+id/ddd"
             android:layout_width="match_parent"
-            android:layout_height="220dp">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
+
+            <RelativeLayout
+                android:id="@+id/aaa"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="220dp">
 
-                <ImageView
-                    android:id="@+id/img1"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="@drawable/image" />
+                    android:layout_height="fill_parent">
 
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="80dp"
-                    android:layout_marginBottom="50dp"
-                    android:src="@drawable/user" />
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@drawable/image" />
 
-            </FrameLayout>
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginVertical="80dp"
+                        android:layout_marginBottom="50dp"
+                        android:src="@drawable/user" />
 
-            <FrameLayout
-                android:id="@+id/frame1"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_alignParentBottom="true"
-                android:background="#202735" />
+                </FrameLayout>
 
-        </RelativeLayout>
+                <FrameLayout
+                    android:id="@+id/frame1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/line" />
 
+            </RelativeLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/aaa"
-            android:scrollbarSize="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/aaa"
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/btn_side_level_1"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:id="@+id/btn_side_level_1">
+                    android:layout_height="70dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -102,7 +105,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:text="1번 액티비티"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/add_img1"
@@ -127,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="1번 액티비티 하위 메뉴1"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline1_1"
@@ -146,7 +149,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
                         android:text="1번 액티비티 하위 메뉴2"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline1_2"
@@ -164,9 +167,9 @@
                         android:layout_below="@+id/childline1_2"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
                         android:text="1번 액티비티 하위 메뉴3"
-                        android:textColor="#202735"
-                        android:layout_marginBottom="20dp"/>
+                        android:textColor="@color/line" />
 
                 </RelativeLayout>
 
@@ -175,12 +178,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="#202735" />
+                    android:background="@color/line" />
 
                 <RelativeLayout
+                    android:id="@+id/btn_side_level_2"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:id="@+id/btn_side_level_2">
+                    android:layout_height="70dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,7 +191,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:text="2번 액티비티"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/add_img2"
@@ -213,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="2번 액티비티 하위 메뉴1"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline2_1"
@@ -232,7 +235,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
                         android:text="2번 액티비티 하위 메뉴2"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline2_2"
@@ -250,9 +253,9 @@
                         android:layout_below="@+id/childline2_2"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
                         android:text="2번 액티비티 하위 메뉴3"
-                        android:textColor="#202735"
-                        android:layout_marginBottom="20dp"/>
+                        android:textColor="@color/line" />
 
                 </RelativeLayout>
 
@@ -260,12 +263,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="#202735" />
+                    android:background="@color/line" />
 
                 <RelativeLayout
+                    android:id="@+id/btn_side_level_3"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:id="@+id/btn_side_level_3">
+                    android:layout_height="70dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -273,7 +276,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:text="3번 액티비티"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/add_img3"
@@ -298,7 +301,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="3번 액티비티 하위 메뉴1"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline3_1"
@@ -317,7 +320,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
                         android:text="3번 액티비티 하위 메뉴2"
-                        android:textColor="#202735"/>
+                        android:textColor="@color/line" />
 
                     <View
                         android:id="@+id/childline3_2"
@@ -335,9 +338,9 @@
                         android:layout_below="@+id/childline3_2"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
                         android:text="3번 액티비티 하위 메뉴3"
-                        android:textColor="#202735"
-                        android:layout_marginBottom="20dp"/>
+                        android:textColor="@color/line" />
 
                 </RelativeLayout>
 
@@ -345,15 +348,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="#202735" />
+                    android:background="@color/line" />
 
             </LinearLayout>
-        </ScrollView>
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/ccc"
+        android:background="@color/title_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
@@ -361,7 +366,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray" />
 
         <ImageView
             android:id="@+id/share"
@@ -372,6 +377,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/share"
-            android:tint="@android:color/black"/>
+            android:tint="@color/contents"/>
     </RelativeLayout>
+
 </RelativeLayout>
