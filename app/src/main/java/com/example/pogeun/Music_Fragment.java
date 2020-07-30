@@ -49,7 +49,7 @@ public class Music_Fragment extends Fragment {
         // 아이템 추가.
         for (Field field : fields) {
             try {
-                imgID = getResources().getIdentifier(field.getName(), "drawable", null);
+                imgID = getResources().getIdentifier(field.getName(), "drawable", getActivity().getPackageName());
                 bitmap = ((BitmapDrawable) mRecyclerView.getResources().getDrawable(imgID)).getBitmap();
                 Bitmap resizedBmp = Bitmap.createScaledBitmap(bitmap, (int) width, (int) height, true);
                 drawable = new BitmapDrawable(resizedBmp);

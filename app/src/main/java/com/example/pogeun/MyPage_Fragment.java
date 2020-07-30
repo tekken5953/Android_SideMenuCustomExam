@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,13 @@ public class MyPage_Fragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView text = getActivity().findViewById(R.id.change_btn);
         text.setText(back_main);
+        Button edit_btn = getActivity().findViewById(R.id.edit_user_info);
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Nullable

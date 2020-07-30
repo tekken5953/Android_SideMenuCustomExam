@@ -55,7 +55,7 @@ public class Alarm_Fragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                toastMsg("타이머를 현재시간으로 설정하였습니다.");
+                toastMsg("시계를 현재시간으로 설정하였습니다.");
                 timePicker.setHour(hour);
                 timePicker.setMinute(min);
             }
