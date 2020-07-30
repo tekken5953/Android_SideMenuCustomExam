@@ -26,7 +26,7 @@ public class MyPage_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.userinfo_fragment, container, false);
         return viewGroup;
     }
 }

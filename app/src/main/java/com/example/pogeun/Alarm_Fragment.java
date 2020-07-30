@@ -20,19 +20,35 @@ import java.util.Calendar;
 public class Alarm_Fragment extends Fragment {
     TimePicker timePicker;
     Calendar calendar = Calendar.getInstance();
+    int month = calendar.get(Calendar.MONTH);
+    int day = calendar.get(Calendar.DATE);
     int hour = calendar.get(Calendar.HOUR_OF_DAY);
     int min = calendar.get(Calendar.MINUTE);
+    TextView setting_time;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         timePicker = getActivity().findViewById(R.id.time_picker);
+        setting_time = getActivity().findViewById(R.id.alarm_time);
 
         getActivity().findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMsg("해당시간으로 알람을 설정하였습니다.");
                 //TODO
+                toastMsg("알람을 설정하였습니다!");
+                if (timePicker.getHour() < hour){
+                    setting_time.setText(month+"월 "+(day+1) +"일  "+timePicker.getHour()+"시 "+timePicker.getMinute()+"분");
+                }else if (timePicker.getHour() == hour){
+                    if (timePicker.getMinute() > min){
+                        setting_time.setText(month+"월 "+day +"일  "+timePicker.getHour()+"시 "+timePicker.getMinute()+"분");
+                    }else{
+                        setting_time.setText(month+"월 "+(day+1) +"일  "+timePicker.getHour()+"시 "+timePicker.getMinute()+"분");
+                    }
+                }
+                else{
+                    setting_time.setText(month+"월 "+day +"일  "+timePicker.getHour()+"시 "+timePicker.getMinute()+"분");
+                }
             }
         });
         getActivity().findViewById(R.id.current_time).setOnClickListener(new View.OnClickListener() {
@@ -63,7 +79,7 @@ public class Alarm_Fragment extends Fragment {
         Toast toast = new Toast(getContext());
         text.setTextSize(13);
         text.setTextColor(Color.BLACK);
-        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 600);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setView(layout);
         text.setText(s);
         toast.show();

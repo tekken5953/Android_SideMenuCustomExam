@@ -18,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -77,16 +79,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }, 2000);
                     }
                 }
-            }else if(fragment.isVisible() && fragment.equals(fragment5)){
+            } else if (fragment.isVisible() && fragment.equals(fragment5)) {
                 bottomNavigationView.setSelectedItemId(R.id.bottom_option);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
-            }
-            else{
+            } else {
                 bottomNavigationView.setSelectedItemId(R.id.bottom_home);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
             }
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,21 +168,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void btnChild1() {
                 closeMenu();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_home);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment1).commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
             }
 
             @Override
             public void btnChild2() {
                 closeMenu();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_music);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment2).commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
             }
 
             @Override
             public void btnChild3() {
                 closeMenu();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_alarm);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment3).commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
             }
 
             @Override
@@ -226,11 +228,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (back_main.getText().toString().equals("music")){
+        if (back_main.getText().toString().equals("music")) {
             bottomNavigationView.setSelectedItemId(R.id.bottom_music);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
-        }
-        else{
+        } else {
             bottomNavigationView.setSelectedItemId(R.id.bottom_home);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
         }
@@ -247,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 viewLayout.setEnabled(false);
                 mainLayout.setEnabled(true);
             }
-        }, 450);
+        }, 400);
     }
 
     public void showMenu() {

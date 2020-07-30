@@ -10,7 +10,7 @@
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="3dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginRight="3dp"
         android:layout_marginTop="15dp"/>
 
 </RelativeLayout>
