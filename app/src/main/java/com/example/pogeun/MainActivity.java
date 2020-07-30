@@ -98,9 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         init();
         addSideView();  //사이드바 add
-        add_btn1 = findViewById(R.id.add_img1);
-        add_btn2 = findViewById(R.id.add_img2);
-        add_btn3 = findViewById(R.id.add_img3);
+        add_btn1 = findViewById(R.id.edit_name_btn);
+        add_btn2 = findViewById(R.id.edit_id_btn);
+        add_btn3 = findViewById(R.id.edit_email_btn);
         add_layout1 = findViewById(R.id.btn_side_level_1);
         add_layout2 = findViewById(R.id.btn_side_level_2);
         add_layout3 = findViewById(R.id.btn_side_level_3);
