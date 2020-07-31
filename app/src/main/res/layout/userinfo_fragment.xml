@@ -36,8 +36,8 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
-                    android:background="@drawable/button_background"
-                    android:drawableTint="@color/title_color"
+                    android:background="@drawable/toast_msg"
+                    android:drawableTint="@color/bright_black"
                     android:src="@drawable/edit_user_info"
                     android:tint="@color/title_color" />
 

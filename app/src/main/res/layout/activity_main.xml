@@ -37,14 +37,14 @@
                 android:textStyle="bold"/>
 
             <ImageView
+                android:id="@+id/log_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/log_out"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/person"
-                android:tint="@color/contents"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:src="@drawable/person"
+                android:tint="@color/contents" />
 
         </RelativeLayout>
 
@@ -73,8 +73,8 @@
             android:layout_height="65dp"
             android:background="@android:color/white"
             app:menu="@menu/bottom_nav"
-            app:itemIconTint="@color/title_color"
-            app:itemTextColor="@color/title_color"
+            app:itemIconTint="@drawable/bottomnav_tint"
+            app:itemTextColor="@drawable/bottomnav_tint"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 

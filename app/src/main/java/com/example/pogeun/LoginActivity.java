@@ -55,17 +55,29 @@ public class LoginActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         toastMsg("접속에 성공했습니다. 안녕하세요 :)");
                         finish();
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     toastMsg("접속에 실패했습니다 :(");
                 }
             }
-            });
+        });
+
+        miss_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastMsg("어쩌라구여 ㅎㅎ");
+            }
+        });
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastMsg("없어도 되는데?");
+            }
+        });
     }
 
-    public void keyboardUp(EditText editText){
+    public void keyboardUp(EditText editText) {
         editText.setFocusableInTouchMode(true);
         editText.requestFocus();
         //focus 후 키보드 올리기

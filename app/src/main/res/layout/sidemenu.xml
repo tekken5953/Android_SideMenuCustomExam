@@ -49,7 +49,7 @@
             <RelativeLayout
                 android:id="@+id/aaa"
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="250dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/line" />
+                    android:background="@color/bright_black" />
 
             </RelativeLayout>
 
@@ -124,7 +124,7 @@
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        android:layout_marginLeft="20dp"-->
                 <!--                        android:text="1번 액티비티 하위 메뉴1"-->
-                <!--                        android:textColor="@color/line" />-->
+                <!--                        android:textColor="@color/bright_black" />-->
 
                 <!--                    <View-->
                 <!--                        android:id="@+id/childline1_1"-->
@@ -143,7 +143,7 @@
                 <!--                        android:layout_marginLeft="20dp"-->
                 <!--                        android:layout_marginTop="15dp"-->
                 <!--                        android:text="1번 액티비티 하위 메뉴2"-->
-                <!--                        android:textColor="@color/line" />-->
+                <!--                        android:textColor="@color/bright_black" />-->
 
                 <!--                    <View-->
                 <!--                        android:id="@+id/childline1_2"-->
@@ -163,7 +163,7 @@
                 <!--                        android:layout_marginTop="15dp"-->
                 <!--                        android:layout_marginBottom="20dp"-->
                 <!--                        android:text="1번 액티비티 하위 메뉴3"-->
-                <!--                        android:textColor="@color/line" />-->
+                <!--                        android:textColor="@color/bright_black" />-->
 
                 <!--                </RelativeLayout>-->
 
@@ -172,7 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/line" />
+                    android:background="@color/bright_black" />
 
                 <RelativeLayout
                     android:id="@+id/btn_side_level_2"
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="뮤직 화면"
+                        android:text="음악 화면"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -202,7 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/line" />
+                    android:background="@color/bright_black" />
 
                 <RelativeLayout
                     android:id="@+id/btn_side_level_3"
@@ -232,7 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/line" />
+                    android:background="@color/bright_black" />
 
             </LinearLayout>
 

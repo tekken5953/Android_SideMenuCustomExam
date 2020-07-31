@@ -36,7 +36,6 @@ public class RecyclerImageTextAdapter extends RecyclerView.Adapter<RecyclerImage
     private OnItemClickListener mListener = null;
 
 
-
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
     }

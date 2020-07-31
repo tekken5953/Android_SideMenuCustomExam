@@ -1,11 +1,12 @@
 package com.example.pogeun;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-public class SideBarView extends RelativeLayout implements View.OnClickListener{
+public class SideBarView extends RelativeLayout implements View.OnClickListener {
 
     // 메뉴버튼 클릭 이벤트 리스너
     public EventListener listener;
@@ -18,11 +19,17 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
     public interface EventListener {
         // 닫기 버튼 클릭 이벤트
         void btnCancel();
+
         void btnChild1();
+
         void btnChild2();
+
         void btnChild3();
+
         void share();
+
         void option();
+
         void my_page();
     }
 
@@ -35,7 +42,7 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
         super(context, attrs);
     }
 
-    private void init(){
+    private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.sidemenu, this, true);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_side_level_1).setOnClickListener(this);
@@ -49,18 +56,18 @@ public class SideBarView extends RelativeLayout implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.btn_cancel :
+            case R.id.btn_cancel:
                 listener.btnCancel();
                 break;
-            case R.id.btn_side_level_1 :
+            case R.id.btn_side_level_1:
                 listener.btnChild1();
                 break;
-            case R.id.btn_side_level_2 :
+            case R.id.btn_side_level_2:
                 listener.btnChild2();
                 break;
-            case R.id.btn_side_level_3 :
+            case R.id.btn_side_level_3:
                 listener.btnChild3();
                 break;
             case R.id.share:

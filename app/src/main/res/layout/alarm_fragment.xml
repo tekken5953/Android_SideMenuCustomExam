@@ -64,7 +64,19 @@
             android:text="알람 없음"
             android:textSize="22sp"
             android:layout_marginTop="15dp"
-            android:textColor="@color/title_color"/>
+            android:textColor="@color/bright_black"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/no"
+            android:layout_toRightOf="@id/alarm_time"
+            android:layout_below="@id/alarm_time_tx"
+            android:layout_marginTop="17dp"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone"
+            android:id="@+id/alarm_delete"
+            android:tint="@android:color/holo_red_dark"/>
 
     </RelativeLayout>
 

@@ -8,8 +8,7 @@
         android:layout_height="100dp"
         android:layout_margin="3dp"
         android:id="@+id/listitem_img"
-        android:src="@drawable/no_img"
-        android:layout_above="@+id/recycler_line" />
+        android:src="@drawable/no_img"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,11 +35,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/recycler_line"
-        android:background="@color/title_color"/>
+
 
 </RelativeLayout>

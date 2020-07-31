@@ -26,7 +26,7 @@
         android:layout_below="@+id/login_text"
         android:layout_marginTop="30dp"
         android:hint="아이디를 입력하세요."
-        android:backgroundTint="@color/title_color"
+        android:backgroundTint="@color/bright_black"
         android:gravity="center"/>
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_below="@+id/login_edit_id"
         android:layout_marginTop="20dp"
         android:hint="비밀번호를 입력하세요."
-        android:backgroundTint="@color/title_color"
+        android:backgroundTint="@color/bright_black"
         android:inputType="numberPassword"
         android:gravity="center"/>
 
@@ -49,6 +49,7 @@
         android:layout_below="@+id/login_edit_pwd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:textColor="@color/bright_black"
         android:textSize="12sp"/>
 
     <TextView
@@ -57,6 +58,7 @@
         android:text="아이디가 없으세요?"
         android:id="@+id/sign_up"
         android:textSize="12sp"
+        android:textColor="@color/bright_black"
         android:layout_below="@+id/miss_pwd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"/>

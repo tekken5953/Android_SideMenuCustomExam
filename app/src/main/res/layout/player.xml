@@ -20,8 +20,8 @@
             android:id="@+id/backpress"
             android:tint="@color/contents"
             android:src="@drawable/backpress"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="7dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
 
         <ImageView
             android:layout_width="310dp"
@@ -29,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="150dp"
             android:src="@drawable/no_img"
             android:id="@+id/musicimg"/>
     </FrameLayout>
@@ -51,18 +51,38 @@
             android:ellipsize="marquee"
             android:typeface="serif"
             android:gravity="center"
-            android:textColor="@color/title_color"/>
+            android:textColor="@color/bright_black"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/seekbar_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/playerlinear"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@+id/seekbar"
+        android:text="0:00"
+        android:textSize="15sp" />
+
     <SeekBar
-        android:layout_width="300dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/playerlinear"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:progressTint="@color/title_color"
-        android:thumbTint="@color/title_color"
+        android:progressTint="@color/bright_black"
+        android:thumbTint="@color/bright_black"
         android:id="@+id/seekbar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0:00"
+        android:id="@+id/seekbar_progress"
+        android:layout_toRightOf="@+id/seekbar"
+        android:layout_above="@id/playerlinear"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,24 +96,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/previousimg"
-            android:tint="@color/title_color"
+            android:tint="@color/bright_black"
             android:id="@+id/previousbtn"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="40dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/playimg"
+            android:layout_gravity="center"
             android:id="@+id/playbtn"
-            android:tint="@color/title_color"/>
+            android:tint="@color/bright_black"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/nextimg"
-            android:tint="@color/title_color"
+            android:tint="@color/bright_black"
             android:id="@+id/nextbtn"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="40dp"/>
     </LinearLayout>
 
 </RelativeLayout>

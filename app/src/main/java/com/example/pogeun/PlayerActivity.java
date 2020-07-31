@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.lang.reflect.Field;
 import java.util.Objects;
 
@@ -21,13 +23,14 @@ public class PlayerActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
     ImageView play_btn, next_btn, previous_btn, music_img;
-    TextView music_tx;
+    TextView music_tx, seek_progress, seek_current;
     final Field[] fields = R.raw.class.getFields();
     int count = 0;
     int resID, imgID;
     String music_name;
     SeekBar seekBar;
-    ImageView backpress;
+    ImageView back_press;
+    int total;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -40,7 +43,9 @@ public class PlayerActivity extends AppCompatActivity {
         previous_btn = findViewById(R.id.previousbtn);
         music_img = findViewById(R.id.musicimg);
         music_tx = findViewById(R.id.musictx);
-        backpress = findViewById(R.id.backpress);
+        back_press = findViewById(R.id.backpress);
+        seek_progress = findViewById(R.id.seekbar_progress);
+        seek_current = findViewById(R.id.seekbar_current);
         count = Objects.requireNonNull(getIntent().getExtras()).getInt("index");
         resID = getResources().getIdentifier(fields[count].getName(), "raw", getPackageName());
         imgID = getResources().getIdentifier(fields[count].getName(), "drawable", getPackageName());
@@ -51,6 +56,8 @@ public class PlayerActivity extends AppCompatActivity {
         translateText();
         music_tx.setText(music_name);
         music_tx.setSelected(true);
+        total = mediaPlayer.getDuration() / 1000;
+        seek_progress.setText((total / 60) + ":" + (total % 60));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -60,7 +67,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
         }, 1000);
 
-        backpress.setOnClickListener(new View.OnClickListener() {
+        back_press.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
@@ -71,8 +78,10 @@ public class PlayerActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser)  // 사용자가 시크바를 움직이면
+                if (fromUser) {  // 사용자가 시크바를 움직이면
                     mediaPlayer.seekTo(progress);   // 재생위치를 바꿔준다(움직인 곳에서의 음악재생)
+                    thread();
+                }
             }
 
             @Override
@@ -84,26 +93,24 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
-        //push >> or << or play or pause
+        //push play or pause
+        play_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                play_btn.setImageResource(R.drawable.pauseimg);
+                if (mediaPlayer.isPlaying()) {
+                    play_btn.setImageResource(R.drawable.playimg);
+                    mediaPlayer.pause();
+                } else {
+                    play_btn.setImageResource(R.drawable.pauseimg);
+                    mediaPlayer.start();
+                    thread();
+                }
+            }
+        });
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                //push play or pause
-                play_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        play_btn.setImageResource(R.drawable.pauseimg);
-                        if (mediaPlayer.isPlaying()) {
-                            play_btn.setImageResource(R.drawable.playimg);
-                            mediaPlayer.pause();
-                        } else {
-                            play_btn.setImageResource(R.drawable.pauseimg);
-                            mediaPlayer.start();
-                        }
-                    }
-                });
-
                 next_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -214,17 +221,26 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     public void thread() {
-        new Thread(new Runnable() {  // 쓰레드 생성
+        new Thread(new Runnable() {// 쓰레드 생성
             @Override
             public void run() {
                 while (mediaPlayer.isPlaying()) {  // 음악이 실행중일때 계속 돌아가게 함
                     try {
+                        int current = mediaPlayer.getCurrentPosition() / 1000;
+                        // 1초마다 시크바 움직이게 함
+                        if ((current % 60) < 10) {
+                            seek_current.setText((current / 60) + ":0" + (current % 60));
+                            // 현재 재생중인 위치를 가져와 시크바에 적용
+                        } else {
+                            seek_current.setText((current / 60) + ":" + (current % 60));
+                            // 현재 재생중인 위치를 가져와 시크바에 적용
+                        }
+                        seekBar.setProgress(mediaPlayer.getCurrentPosition());
                         Thread.sleep(1000); // 1초마다 시크바 움직이게 함
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    // 현재 재생중인 위치를 가져와 시크바에 적용
-                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+
                 }
             }
         }).start();
@@ -243,6 +259,8 @@ public class PlayerActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(PlayerActivity.this, resID);
         resizeImg();
         translateText();
+        total = mediaPlayer.getDuration() / 1000;
+        seek_progress.setText((total / 60) + ":" + (total % 60));
         music_tx.setText(music_name);
         music_tx.setSelected(true);
         seekBar.setProgress(0);

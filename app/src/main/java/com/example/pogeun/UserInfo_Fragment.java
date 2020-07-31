@@ -45,7 +45,7 @@ public class UserInfo_Fragment extends Fragment {
                 final ImageView edit_name = view.findViewById(R.id.edit_name_btn);
                 final ImageView edit_id = view.findViewById(R.id.edit_id_btn);
                 final ImageView edit_email = view.findViewById(R.id.edit_email_btn);
-                final ImageView edit_profile =  view.findViewById(R.id.edit_profile_btn);
+                final ImageView edit_profile = view.findViewById(R.id.edit_profile_btn);
                 final ImageView edit_back = view.findViewById(R.id.edit_back_btn);
                 final EditText edit_name_edit = view.findViewById(R.id.edit_name);
                 final EditText edit_id_edit = view.findViewById(R.id.edit_id);
@@ -66,6 +66,7 @@ public class UserInfo_Fragment extends Fragment {
                 fadeAnimaion(edit_id, id_ok, id_no, edit_id_edit, fade_in, fade_out);
                 fadeAnimaion(edit_email, email_ok, email_no, edit_email_edit, fade_in, fade_out);
 
+                alertDialog.show();
             }
         });
     }

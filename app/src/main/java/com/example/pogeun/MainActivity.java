@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -120,14 +118,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 PopupMenu popup = new PopupMenu(mContext, log_out);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater().inflate(R.menu.popmenu, popup.getMenu());
-                v.setPadding(0,0,0,20);
+                v.setPadding(0, 0, 0, 20);
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.pop_my_info:
-                                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment5).commitAllowingStateLoss();
+                                currentFragment(fragment5, R.id.user_icon);
                                 break;
                             case R.id.pop_log_out:
                                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -155,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 builder.show();
                                 break;
                         }
-
                         return true;
                     }
                 });
@@ -163,11 +159,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
                     @Override
                     public void onDismiss(PopupMenu menu) {
-                        v.setPadding(0,0,0,0);
+                        v.setPadding(0, 0, 0, 0);
                     }
                 });
-
-                popup.show();//showing popup menu
+                popup.show();
             }
         });
 
@@ -228,23 +223,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void btnChild1() {
-                closeMenu();
-                bottomNavigationView.setSelectedItemId(R.id.bottom_home);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
+                currentFragment(fragment1, R.id.home);
             }
 
             @Override
             public void btnChild2() {
-                closeMenu();
-                bottomNavigationView.setSelectedItemId(R.id.bottom_music);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
+                currentFragment(fragment2, R.id.bottom_music);
             }
 
             @Override
             public void btnChild3() {
-                closeMenu();
-                bottomNavigationView.setSelectedItemId(R.id.bottom_alarm);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
+                currentFragment(fragment3, R.id.bottom_alarm);
             }
 
             @Override
@@ -266,16 +255,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void option() {
-                closeMenu();
-                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
+                currentFragment(fragment4, R.id.bottom_option);
             }
 
             @Override
             public void my_page() {
-                closeMenu();
-                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment5).commitAllowingStateLoss();
+                currentFragment(fragment5, R.id.user_icon);
             }
         });
     }
@@ -320,6 +305,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewLayout.setVisibility(View.VISIBLE);
         viewLayout.setEnabled(true);
         mainLayout.setEnabled(false);
+    }
+
+    public void currentFragment(Fragment frag, int id) {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment.isVisible() && fragment.equals(frag)) {
+                closeMenu();
+            } else {
+                closeMenu();
+                bottomNavigationView.setSelectedItemId(id);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, frag).commitAllowingStateLoss();
+            }
+        }
     }
 
     public void toastMsg(String s) {

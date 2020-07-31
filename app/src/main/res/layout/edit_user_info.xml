@@ -51,7 +51,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:src="@drawable/edit_user_info"
-            android:tint="@color/title_color" />
+            android:tint="@color/bright_black" />
 
         <ImageView
             android:id="@+id/name_ok"
@@ -61,7 +61,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
             android:src="@drawable/ok"
-            android:tint="@color/title_color"
+            android:tint="@color/bright_black"
             android:visibility="gone" />
 
         <ImageView
@@ -115,7 +115,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:src="@drawable/edit_user_info"
-            android:tint="@color/title_color" />
+            android:tint="@color/bright_black" />
 
         <ImageView
             android:id="@+id/id_ok"
@@ -125,7 +125,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
             android:src="@drawable/ok"
-            android:tint="@color/title_color"
+            android:tint="@color/bright_black"
             android:visibility="gone" />
 
         <ImageView
@@ -176,7 +176,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:src="@drawable/edit_user_info"
-            android:tint="@color/title_color" />
+            android:tint="@color/bright_black" />
 
         <ImageView
             android:id="@+id/email_ok"
@@ -186,7 +186,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
             android:src="@drawable/ok"
-            android:tint="@color/title_color"
+            android:tint="@color/bright_black"
             android:visibility="gone" />
 
         <ImageView
@@ -227,7 +227,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:src="@drawable/edit_user_info"
-            android:tint="@color/title_color" />
+            android:tint="@color/bright_black" />
 
     </RelativeLayout>
 
@@ -258,7 +258,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:src="@drawable/edit_user_info"
-            android:tint="@color/title_color" />
+            android:tint="@color/bright_black" />
 
     </RelativeLayout>
 
