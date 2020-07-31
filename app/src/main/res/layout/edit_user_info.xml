@@ -7,18 +7,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:text="개인정보 수정"
         android:textColor="@color/title_color"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
-        android:background="@color/line"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@color/line" />
 
     <RelativeLayout
         android:id="@+id/btn_side_level_1"
@@ -31,17 +31,17 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="닉네임"
-            android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/edit_name"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_name"
-            android:lines="1"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:visibility="gone"
-            android:layout_centerInParent="true"/>
+            android:lines="1"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/edit_name_btn"
@@ -54,25 +54,25 @@
             android:tint="@color/title_color" />
 
         <ImageView
+            android:id="@+id/name_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ok"
-            android:id="@+id/name_ok"
-            android:visibility="gone"
-            android:tint="@color/title_color"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/ok"
+            android:tint="@color/title_color"
+            android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/name_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/no"
-            android:id="@+id/name_no"
-            android:visibility="gone"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/no"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -93,19 +93,19 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="아이디"
-            android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/edit_id"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_id"
-            android:lines="1"
-            android:visibility="gone"
-            android:gravity="center"
-            android:layout_toLeftOf="@+id/id_ok"
+            android:layout_centerInParent="true"
             android:layout_marginRight="15dp"
-            android:layout_centerInParent="true"/>
+            android:layout_toLeftOf="@+id/id_ok"
+            android:gravity="center"
+            android:lines="1"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/edit_id_btn"
@@ -118,25 +118,25 @@
             android:tint="@color/title_color" />
 
         <ImageView
+            android:id="@+id/id_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ok"
-            android:id="@+id/id_ok"
-            android:tint="@color/title_color"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
-            android:visibility="gone"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/ok"
+            android:tint="@color/title_color"
+            android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/id_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/no"
-            android:id="@+id/id_no"
-            android:visibility="gone"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/no"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -156,17 +156,17 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="이메일"
-            android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/edit_email"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_email"
-            android:lines="1"
-            android:visibility="gone"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:layout_centerInParent="true"/>
+            android:lines="1"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/edit_email_btn"
@@ -179,25 +179,25 @@
             android:tint="@color/title_color" />
 
         <ImageView
+            android:id="@+id/email_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ok"
-            android:id="@+id/email_ok"
-            android:visibility="gone"
-            android:tint="@color/title_color"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/ok"
+            android:tint="@color/title_color"
+            android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/email_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/no"
-            android:id="@+id/email_no"
-            android:visibility="gone"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/no"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <FrameLayout
@@ -216,8 +216,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="프로필 사진"
-            android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/edit_profile_btn"
@@ -247,8 +247,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="배경 사진"
-            android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/edit_back_btn"
@@ -257,8 +257,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
-            android:tint="@color/title_color"
-            android:src="@drawable/edit_user_info" />
+            android:src="@drawable/edit_user_info"
+            android:tint="@color/title_color" />
 
     </RelativeLayout>
 
@@ -268,13 +268,13 @@
         android:background="@color/line" />
 
     <Button
+        android:id="@+id/edit_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:text="나가기"
-        android:layout_marginBottom="15dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:id="@+id/edit_cancel_btn"/>
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_background"
+        android:text="나가기" />
 
 </LinearLayout>

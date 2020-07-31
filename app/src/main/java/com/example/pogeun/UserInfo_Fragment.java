@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class MyPage_Fragment extends Fragment {
+public class UserInfo_Fragment extends Fragment {
 
     ViewGroup viewGroup;
     String back_main = "my_page";
@@ -41,21 +41,21 @@ public class MyPage_Fragment extends Fragment {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.edit_user_info, null, false);
                 builder.setView(view);
                 final AlertDialog alertDialog = builder.create();
-                final Button edit_cancel_btn = (Button) view.findViewById(R.id.edit_cancel_btn);
-                final ImageView edit_name = (ImageView) view.findViewById(R.id.edit_name_btn);
-                final ImageView edit_id = (ImageView) view.findViewById(R.id.edit_id_btn);
-                final ImageView edit_email = (ImageView) view.findViewById(R.id.edit_email_btn);
-                final ImageView edit_profile = (ImageView) view.findViewById(R.id.edit_profile_btn);
-                final ImageView edit_back = (ImageView) view.findViewById(R.id.edit_back_btn);
-                final EditText edit_name_edit = (EditText) view.findViewById(R.id.edit_name);
-                final EditText edit_id_edit = (EditText) view.findViewById(R.id.edit_id);
-                final EditText edit_email_edit = (EditText) view.findViewById(R.id.edit_email);
-                final ImageView name_ok = (ImageView) view.findViewById(R.id.name_ok);
-                final ImageView name_no = (ImageView) view.findViewById(R.id.name_no);
-                final ImageView id_ok = (ImageView) view.findViewById(R.id.id_ok);
-                final ImageView id_no = (ImageView) view.findViewById(R.id.id_no);
-                final ImageView email_ok = (ImageView) view.findViewById(R.id.email_ok);
-                final ImageView email_no = (ImageView) view.findViewById(R.id.email_no);
+                final Button edit_cancel_btn = view.findViewById(R.id.edit_cancel_btn);
+                final ImageView edit_name = view.findViewById(R.id.edit_name_btn);
+                final ImageView edit_id = view.findViewById(R.id.edit_id_btn);
+                final ImageView edit_email = view.findViewById(R.id.edit_email_btn);
+                final ImageView edit_profile =  view.findViewById(R.id.edit_profile_btn);
+                final ImageView edit_back = view.findViewById(R.id.edit_back_btn);
+                final EditText edit_name_edit = view.findViewById(R.id.edit_name);
+                final EditText edit_id_edit = view.findViewById(R.id.edit_id);
+                final EditText edit_email_edit = view.findViewById(R.id.edit_email);
+                final ImageView name_ok = view.findViewById(R.id.name_ok);
+                final ImageView name_no = view.findViewById(R.id.name_no);
+                final ImageView id_ok = view.findViewById(R.id.id_ok);
+                final ImageView id_no = view.findViewById(R.id.id_no);
+                final ImageView email_ok = view.findViewById(R.id.email_ok);
+                final ImageView email_no = view.findViewById(R.id.email_no);
                 edit_cancel_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -66,7 +66,6 @@ public class MyPage_Fragment extends Fragment {
                 fadeAnimaion(edit_id, id_ok, id_no, edit_id_edit, fade_in, fade_out);
                 fadeAnimaion(edit_email, email_ok, email_no, edit_email_edit, fade_in, fade_out);
 
-                alertDialog.show();
             }
         });
     }

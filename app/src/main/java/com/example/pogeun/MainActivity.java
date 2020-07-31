@@ -1,6 +1,7 @@
 package com.example.pogeun;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -14,12 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Music_Fragment fragment2 = new Music_Fragment();
     private Alarm_Fragment fragment3 = new Alarm_Fragment();
     private Option_Fragment fragment4 = new Option_Fragment();
-    private MyPage_Fragment fragment5 = new MyPage_Fragment();
+    private UserInfo_Fragment fragment5 = new UserInfo_Fragment();
     private BottomNavigationView bottomNavigationView;
 
     RelativeLayout add_layout1, add_layout2, add_layout3;
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String end_str = "뒤로가기를 한번 더 누르시면\n앱이 종료됩니다.";
     String share_str = "공유할수 없는 환경입니다.";
     TextView back_main;
+    ImageView log_out;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -92,9 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.title_color));
-        }
+        getWindow().setStatusBarColor(getResources().getColor(R.color.title_color));
         setContentView(R.layout.activity_main);
         init();
         addSideView();  //사이드바 add
@@ -108,6 +111,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         option = findViewById(R.id.option_img);
         user_icon = findViewById(R.id.user_icon);
         back_main = findViewById(R.id.change_btn);
+        log_out = findViewById(R.id.log_out);
+
+        log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(mContext, log_out);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popmenu, popup.getMenu());
+                v.setPadding(0,0,0,20);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.pop_my_info:
+                                bottomNavigationView.setSelectedItemId(R.id.bottom_option);
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment5).commitAllowingStateLoss();
+                                break;
+                            case R.id.pop_log_out:
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                                toastMsg("로그아웃 하셨습니다.\n새로 로그인 해주세요.");
+                                break;
+                            case R.id.pop_terminate:
+                                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                builder.setTitle("포근 종료");
+                                builder.setMessage("앱을 종료하시겠습니까?");
+                                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        System.exit(0);
+                                    }
+                                });
+                                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder.show();
+                                break;
+                        }
+
+                        return true;
+                    }
+                });
+
+                popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                    @Override
+                    public void onDismiss(PopupMenu menu) {
+                        v.setPadding(0,0,0,0);
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+        });
 
         bottomNavigationView = findViewById(R.id.navigationView);
         // 첫화면에 띄워야 할 것들 지정해주기

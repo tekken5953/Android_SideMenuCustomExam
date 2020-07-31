@@ -34,9 +34,7 @@ public class PlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(Color.parseColor("#353433"));
-        }
+        getWindow().setStatusBarColor(Color.parseColor("#353433"));
         play_btn = findViewById(R.id.playbtn);
         next_btn = findViewById(R.id.nextbtn);
         previous_btn = findViewById(R.id.previousbtn);
@@ -52,6 +50,7 @@ public class PlayerActivity extends AppCompatActivity {
         resizeImg();
         translateText();
         music_tx.setText(music_name);
+        music_tx.setSelected(true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -245,6 +244,7 @@ public class PlayerActivity extends AppCompatActivity {
         resizeImg();
         translateText();
         music_tx.setText(music_name);
+        music_tx.setSelected(true);
         seekBar.setProgress(0);
         seekBar.setMax(mediaPlayer.getDuration());
         thread();
@@ -254,7 +254,6 @@ public class PlayerActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mediaPlayer.stop();
                 if (count < fields.length - 1) {
-                    Log.i("endsong", "곡 끝남 다음곡 진행");
                     count++;
                     changeMusic();
                     mediaPlayer.start();
