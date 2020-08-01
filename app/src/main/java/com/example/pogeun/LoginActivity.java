@@ -2,6 +2,7 @@ package com.example.pogeun;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +18,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -98,4 +104,24 @@ public class LoginActivity extends AppCompatActivity {
         text.setText(s);
         toast.show();
     }
+
+//    private void tedPermission() {
+//        PermissionListener permissionListener = new PermissionListener() {
+//            @Override
+//            public void onPermissionGranted() {
+//                // 권한 요청 성공
+//            }
+//
+//            @Override
+//            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//                // 권한 요청 실패
+//            }
+//        };
+//        TedPermission.with(LoginActivity.this)
+//                .setPermissionListener(permissionListener)
+//                .setRationaleMessage("[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
+//                .setDeniedMessage("사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.")
+//                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+//                .check();
+//    }
 }

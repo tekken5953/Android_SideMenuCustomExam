@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         finish();
                     } else {
                         isExitFlag = true;
-
                         toastMsg(end_str);
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         share = findViewById(R.id.share);
         option = findViewById(R.id.option_img);
         user_icon = findViewById(R.id.user_icon);
-        back_main = findViewById(R.id.change_btn);
+        back_main = findViewById(R.id.back_main);
         log_out = findViewById(R.id.log_out);
 
         log_out.setOnClickListener(new View.OnClickListener() {
@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.pop_my_info:
-                                currentFragment(fragment5, R.id.user_icon);
+                                currentFragment(fragment5, R.id.bottom_option);
                                 break;
                             case R.id.pop_log_out:
                                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
-                                toastMsg("로그아웃 하셨습니다.\n새로 로그인 해주세요.");
+                                toastMsg("로그아웃 하셨습니다.\n다시 로그인 해주세요.");
                                 break;
                             case R.id.pop_terminate:
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void my_page() {
-                currentFragment(fragment5, R.id.user_icon);
+                currentFragment(fragment5, R.id.bottom_option);
             }
         });
     }
@@ -276,11 +276,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestart() {
         super.onRestart();
         if (back_main.getText().toString().equals("music")) {
-            bottomNavigationView.setSelectedItemId(R.id.bottom_music);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
-        } else {
-            bottomNavigationView.setSelectedItemId(R.id.bottom_home);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
+            currentFragment(fragment2,R.id.bottom_music);
+        }else if (back_main.getText().toString().equals("user_info")){
+            currentFragment(fragment5,R.id.bottom_option);
+        }
+        else {
+            currentFragment(fragment1,R.id.bottom_home);
         }
     }
 
@@ -317,6 +318,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, frag).commitAllowingStateLoss();
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        currentFragment(fragment5,R.id.bottom_option);
     }
 
     public void toastMsg(String s) {

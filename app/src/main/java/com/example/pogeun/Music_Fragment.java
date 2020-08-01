@@ -38,7 +38,7 @@ public class Music_Fragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView text = getActivity().findViewById(R.id.change_btn);
+        TextView text = getActivity().findViewById(R.id.back_main);
         text.setText(back_main);
 
         mRecyclerView = getActivity().findViewById(R.id.recyclerview);

@@ -34,6 +34,15 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="유저의 닉네임"
+            android:textSize="17sp"
+            android:textColor="@color/bright_black"
+            android:id="@+id/edited_name"/>
+
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="150dp"
@@ -94,6 +103,15 @@
             android:layout_marginLeft="15dp"
             android:text="아이디"
             android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/edited_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="유저의 아이디"
+            android:textColor="@color/bright_black"
             android:textSize="17sp" />
 
         <EditText
@@ -159,6 +177,15 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="유저의 이메일"
+            android:textSize="17sp"
+            android:textColor="@color/bright_black"
+            android:id="@+id/edited_email"/>
+
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="150dp"
@@ -220,6 +247,13 @@
             android:textSize="17sp" />
 
         <ImageView
+            android:id="@+id/edited_profile"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/user"/>
+
+        <ImageView
             android:id="@+id/edit_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -251,6 +285,13 @@
             android:textSize="17sp" />
 
         <ImageView
+            android:layout_width="165dp"
+            android:layout_height="120dp"
+            android:id="@+id/edited_back"
+            android:layout_centerInParent="true"
+            android:src="@drawable/image"/>
+
+        <ImageView
             android:id="@+id/edit_back_btn"
             android:layout_width="23dp"
             android:layout_height="23dp"
@@ -275,6 +316,6 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_background"
-        android:text="나가기" />
+        android:text="완료" />
 
 </LinearLayout>

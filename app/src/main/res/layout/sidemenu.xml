@@ -49,24 +49,24 @@
             <RelativeLayout
                 android:id="@+id/aaa"
                 android:layout_width="match_parent"
-                android:layout_height="250dp">
+                android:layout_height="300dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent">
 
                     <ImageView
-                        android:id="@+id/img1"
+                        android:id="@+id/user_back"
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:background="@drawable/image" />
+                        android:layout_height="190dp"
+                        android:src="@drawable/image" />
 
                     <ImageView
                         android:id="@+id/user_icon"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginVertical="80dp"
+                        android:layout_marginVertical="140dp"
                         android:layout_marginBottom="50dp"
                         android:src="@drawable/user" />
 
