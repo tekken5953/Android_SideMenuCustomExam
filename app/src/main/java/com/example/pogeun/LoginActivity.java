@@ -1,38 +1,43 @@
 package com.example.pogeun;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import java.util.Date;
-import java.util.Objects;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
+
+        import android.annotation.SuppressLint;
+        import android.app.AlertDialog;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.graphics.Color;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.text.SpannableString;
+        import android.text.style.UnderlineSpan;
+        import android.view.Gravity;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.view.inputmethod.InputMethodManager;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.TextView;
+        import android.widget.Toast;
+
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
+
+        import java.util.Date;
+        import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference myRef = database.getReference("User Login");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.title_color));
 
         TextView miss_pwd = findViewById(R.id.miss_pwd);
-        TextView sign_up = findViewById(R.id.sign_up);
+        Button sign_up = findViewById(R.id.sign_up);
+        Button log_in_btn = findViewById(R.id.login_btn);
         SpannableString content = new SpannableString(miss_pwd.getText().toString());
-        SpannableString content2 = new SpannableString(sign_up.getText().toString());
-        content2.setSpan(new UnderlineSpan(), 0, content2.length(), 0);
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         miss_pwd.setText(content);
-        sign_up.setText(content2);
-        Button log_in_btn = findViewById(R.id.login_btn);
+
         final EditText user_id = findViewById(R.id.login_edit_id);
         final EditText user_pwd = findViewById(R.id.login_edit_pwd);
         log_in_btn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if (Objects.equals(dataSnapshot.child("비밀번호").getValue(), user_pwd.getText().toString())) {
                                                 createThreadAndDialog();
                                                 return;
-                                            }else{
+                                            } else {
                                                 toastMsg("비밀번가 일치하지 않습니다.");
                                             }
                                         } catch (Exception e) {
@@ -104,43 +107,48 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.sign_up_dialog, null, false);
+                final View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.sign_up_dialog, null, false);
                 builder.setView(view);
                 final AlertDialog alertDialog = builder.create();
                 final EditText sign_up_id = view.findViewById(R.id.sign_up_id);
                 final EditText sign_up_pwd = view.findViewById(R.id.sign_up_pwd);
-                final Button sign_up_btn = view.findViewById(R.id.sign_up_btn);
-                final Button sign_up_cencel = view.findViewById(R.id.sign_up_cancel);
-                sign_up_btn.setOnClickListener(new View.OnClickListener() {
+                final EditText sign_up_email = view.findViewById(R.id.sign_up_email);
+                final Button sign_up_ok = view.findViewById(R.id.sign_up_ok);
+                final Button sign_up_cancel = view.findViewById(R.id.sign_up_cancel);
+                alertDialog.setCanceledOnTouchOutside(false);
+                sign_up_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {//마찬가지로 중복 유무 확인
-                                    if (sign_up_id.getText().toString().equals(dataSnapshot.getKey())) {
-                                        toastMsg("이미 존재하는 아이디 입니다.");
-                                        myRef.removeEventListener(this);
-                                        sign_up_id.setText("");
-                                        sign_up_pwd.setText("");
-                                        keyboardUp(sign_up_id);
-                                        return;
-                                    }else if(sign_up_id.getText().toString().equals("")){
-                                        toastMsg("아이디를 입력해주세요.");
-                                        keyboardUp(sign_up_id);
-                                    }else if(sign_up_pwd.getText().toString().equals("")){
-                                        toastMsg("비밀번호를 입력해주세요.");
-                                        keyboardUp(sign_up_pwd);
-                                    }else{
-                                        Date date = new Date(System.currentTimeMillis()); //날짜
 
-                                        myRef.child(sign_up_id.getText().toString()).child("가입일").setValue(date.toString());
-                                        myRef.child(sign_up_id.getText().toString()).child("비밀번호").setValue(sign_up_pwd.getText().toString());
-                                        //users를 가리키는 기본 참조에서 시작 -> child(Id를 key로 가지는 자식) ->child("가입일 이라는 key를 갖는 자식")의 value를 날짜로 저장
+                                if (sign_up_id.getText().toString().equals(snapshot.getKey())) {
+                                    toastMsg("이미 존재하는 아이디 입니다.");
+                                    myRef.removeEventListener(this);
+                                    sign_up_id.setText("");
+                                    sign_up_pwd.setText("");
+                                    keyboardUp(sign_up_id);
+                                } else if (sign_up_id.getText().toString().equals("")) {
+                                    toastMsg("아이디를 입력해주세요.");
+                                    keyboardUp(sign_up_id);
+                                } else if (sign_up_pwd.getText().toString().equals("")) {
+                                    toastMsg("비밀번호를 입력해주세요.");
+                                    keyboardUp(sign_up_pwd);
+                                } else {
+                                    Date date = new Date(System.currentTimeMillis()); //날짜
 
-                                        toastMsg("가입을 완료했습니다.\n해당 아이디로 로그인이 가능합니다.");
-                                        alertDialog.dismiss();
-                                    }
+                                    myRef.child(sign_up_id.getText().toString()).child("가입일").setValue(date.toString());
+                                    myRef.child(sign_up_id.getText().toString()).child("비밀번호").setValue(sign_up_pwd.getText().toString());
+                                    myRef.child(sign_up_id.getText().toString()).child("이메일").setValue(sign_up_email.getText().toString());
+                                    //users를 가리키는 기본 참조에서 시작 -> child(Id를 key로 가지는 자식) ->child("가입일 이라는 key를 갖는 자식")의 value를 날짜로 저장
+
+                                    toastMsg("가입을 완료했습니다.\n해당 아이디로 로그인이 가능합니다.");
+                                    alertDialog.dismiss();
+                                    //키보드 내리기
+                                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                                    assert imm != null;
+                                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                                 }
                             }
 
@@ -150,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                 });
-                sign_up_cencel.setOnClickListener(new View.OnClickListener() {
+                sign_up_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
@@ -184,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private ProgressDialog loading_Dialog; // Loading Dialog
+
     void createThreadAndDialog() {
         /* ProgressDialog */
         loading_Dialog = ProgressDialog.show(LoginActivity.this, null,
@@ -198,8 +207,9 @@ public class LoginActivity extends AppCompatActivity {
         thread.start();
     }
 
-    private Handler handler = new  Handler() {
-        public void  handleMessage(Message msg) {
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -210,8 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     toastMsg("접속에 성공했습니다. 안녕하세요 :)");
                 }
-            },2000);
+            }, 2000);
         }
     };
-
 }
