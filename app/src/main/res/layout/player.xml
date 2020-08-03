@@ -45,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Song Name - Singer"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:textSize="25sp"
             android:id="@+id/musictx"
             android:singleLine="true"

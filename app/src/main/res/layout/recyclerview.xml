@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="3dp"
-        android:id="@+id/listitem_img"
-        android:src="@drawable/no_img"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/contents">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="3dp"
+                android:id="@+id/listitem_img"
+                android:src="@drawable/no_img"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="노래이름"
-        android:layout_toRightOf="@+id/listitem_img"
-        android:textSize="20sp"
-        android:id="@+id/listitem_name"
-        android:typeface="serif"
-        android:textColor="@color/black"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="노래이름"
+                android:layout_toRightOf="@+id/listitem_img"
+                android:textSize="20sp"
+                android:id="@+id/listitem_name"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="가수이름"
-        android:textSize="15sp"
-        android:id="@+id/listitem_singer"
-        android:typeface="serif"
-        android:textColor="@color/black"
-        android:layout_toRightOf="@+id/listitem_img"
-        android:layout_below="@+id/listitem_name"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가수이름"
+                android:textSize="15sp"
+                android:id="@+id/listitem_singer"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@+id/listitem_img"
+                android:layout_below="@+id/listitem_name"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"/>
+        </RelativeLayout>
 
-
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

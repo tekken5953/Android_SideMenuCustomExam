@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="닉네임"
+            android:text="@string/user_name"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="아이디"
+            android:text="@string/user_id"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -173,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="이메일"
+            android:text="@string/user_email"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -242,7 +242,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="프로필 사진"
+            android:text="@string/user_profile"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -280,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="배경 사진"
+            android:text="@string/user_back"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
@@ -309,7 +309,7 @@
         android:background="@color/line" />
 
     <Button
-        android:id="@+id/edit_cancel_btn"
+        android:id="@+id/edit_finish_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

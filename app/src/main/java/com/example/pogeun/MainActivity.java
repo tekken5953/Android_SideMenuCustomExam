@@ -1,11 +1,13 @@
 package com.example.pogeun;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -127,19 +129,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 currentFragment(fragment5, R.id.bottom_option);
                                 break;
                             case R.id.pop_log_out:
-                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                                toastMsg("로그아웃 하셨습니다.\n다시 로그인 해주세요.");
+                                createThreadAndDialog();
                                 break;
                             case R.id.pop_terminate:
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                builder.setTitle("포근 종료");
                                 builder.setMessage("앱을 종료하시겠습니까?");
+                                builder.setIcon(android.R.drawable.ic_dialog_alert);
+                                builder.setTitle("종료");
                                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
                                         System.exit(0);
                                     }
                                 });
@@ -338,4 +337,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text.setText(s);
         toast.show();
     }
+
+    private ProgressDialog loading_Dialog; // Loading Dialog
+    void createThreadAndDialog() {
+        /* ProgressDialog */
+        loading_Dialog = ProgressDialog.show(MainActivity.this, null,
+                "변경사항을 저장 중 입니다..", true, false);
+
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                // 시간걸리는 처리
+                handler.sendEmptyMessage(0);
+            }
+        });
+        thread.start();
+    }
+
+    private Handler handler = new  Handler() {
+        public void  handleMessage(Message msg) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loading_Dialog.dismiss();
+                    // View갱신
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    toastMsg("로그아웃 하셨습니다.\n다시 로그인 해주세요.");
+                }
+            },2000);
+        }
+    };
 }

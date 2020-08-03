@@ -3,32 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:overScrollMode="ifContentScrolls">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_height="wrap_content">
+
             <FrameLayout
                 android:id="@+id/user_state"
                 android:layout_width="match_parent"
                 android:layout_height="375dp">
 
                 <ImageView
+                    android:id="@+id/user_back_ring"
                     android:layout_width="match_parent"
                     android:layout_height="270dp"
-                    android:src="@drawable/image"
-                    android:id="@+id/user_back_ring"/>
+                    android:src="@drawable/image" />
 
                 <ImageView
                     android:id="@+id/user_icon_ring"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="180dp"
-                    android:src="@drawable/user" />
+                    android:src="@drawable/user"
+                    android:backgroundTint="#00ffff00"/>
 
                 <ImageButton
                     android:id="@+id/edit_user_info"
@@ -43,13 +46,13 @@
                     android:tint="@color/title_color" />
 
                 <TextView
+                    android:id="@+id/user_name_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User"
-                    android:textSize="25sp"
-                    android:id="@+id/user_name_info"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:textColor="@color/black"/>
+                    android:text="@string/user_name"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
 
             </FrameLayout>
 
@@ -63,28 +66,28 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/user_id_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view1"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:text="아이디"
+                android:layout_marginTop="20dp"
+                android:text="@string/user_id"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                android:typeface="serif"
-                android:id="@+id/user_id_tx"
-                android:layout_marginTop="20dp"/>
+                android:typeface="serif" />
 
             <TextView
+                android:id="@+id/user_id_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User_ID_Info"
-                android:layout_marginRight="20dp"
                 android:layout_below="@+id/view1"
-                android:layout_marginTop="20dp"
-                android:textSize="17sp"
                 android:layout_alignParentRight="true"
-                android:id="@+id/user_id_info"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="User_ID_Info"
+                android:textSize="17sp" />
 
             <View
                 android:id="@+id/view2"
@@ -95,28 +98,28 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/user_email_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view2"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:text="이메일"
+                android:layout_marginTop="20dp"
+                android:text="@string/user_email"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                android:typeface="serif"
-                android:id="@+id/user_email_tx"
-                android:layout_marginTop="20dp"/>
+                android:typeface="serif" />
 
             <TextView
+                android:id="@+id/user_email_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User_E-Mail_Info"
-                android:layout_marginRight="20dp"
                 android:layout_below="@+id/view2"
-                android:layout_marginTop="20dp"
-                android:textSize="17sp"
                 android:layout_alignParentRight="true"
-                android:id="@+id/user_email_info"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="User_E-Mail_Info"
+                android:textSize="17sp" />
 
             <View
                 android:id="@+id/view3"
@@ -127,28 +130,28 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/user_sign_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view3"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:text="식별코드"
+                android:layout_marginTop="20dp"
+                android:text="@string/user_sign"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                android:typeface="serif"
-                android:id="@+id/user_sign_tx"
-                android:layout_marginTop="20dp"/>
+                android:typeface="serif" />
 
             <TextView
+                android:id="@+id/user_sign_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User_SIGN_Info"
-                android:layout_marginRight="20dp"
                 android:layout_below="@+id/view3"
-                android:layout_marginTop="20dp"
-                android:textSize="17sp"
                 android:layout_alignParentRight="true"
-                android:id="@+id/user_sign_info"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="User_SIGN_Info"
+                android:textSize="17sp" />
 
             <View
                 android:id="@+id/view4"
@@ -157,7 +160,7 @@
                 android:layout_below="@+id/user_sign_tx"
                 android:layout_marginTop="20dp"
                 android:background="@color/black" />
-            </RelativeLayout>
-        </ScrollView>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
