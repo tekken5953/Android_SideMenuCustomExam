@@ -10,7 +10,7 @@
         android:id="@+id/make_name_tx"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="20dp"/>
     <EditText
         android:layout_width="170dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_marginLeft="60dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"/>
 
     <Button
@@ -32,10 +32,7 @@
         android:id="@+id/make_name_btn"
         android:layout_toRightOf="@+id/make_name_edit"
         android:layout_below="@+id/make_name_tx"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_margin="30dp"/>
 
 
 </RelativeLayout>

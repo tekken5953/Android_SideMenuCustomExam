@@ -27,7 +27,7 @@ public class PlayerActivity extends AppCompatActivity {
     final Field[] fields = R.raw.class.getFields();
     int count = 0;
     int resID, imgID;
-    String music_name;
+    String music_name, genre;
     SeekBar seekBar;
     ImageView back_press;
     int total;
@@ -46,6 +46,7 @@ public class PlayerActivity extends AppCompatActivity {
         back_press = findViewById(R.id.backpress);
         seek_progress = findViewById(R.id.seekbar_progress);
         seek_current = findViewById(R.id.seekbar_current);
+        genre = Objects.requireNonNull(getIntent().getExtras()).getString("genre");
         count = Objects.requireNonNull(getIntent().getExtras()).getInt("index");
         resID = getResources().getIdentifier(fields[count].getName(), "raw", getPackageName());
         imgID = getResources().getIdentifier(fields[count].getName(), "drawable", getPackageName());
@@ -194,10 +195,19 @@ public class PlayerActivity extends AppCompatActivity {
 
     public void translateText() {
         music_name = fields[count].getName();
-        music_name = music_name.replace("9", " ").replace("_", " - ");
-        String a = music_name.substring(0, 1).toUpperCase() + music_name.substring(1);
-        String b = music_name.substring(a.lastIndexOf("-") + 2, a.indexOf("-") + 3);
-        music_name = a.replace(b, b.toUpperCase());
+        try {
+            if (music_name.startsWith(genre)) {
+                int i = music_name.indexOf("_");
+                String s = music_name.substring(0, i + 1);
+                music_name = music_name.replaceFirst(s, "");
+                music_name = music_name.replace("9", " ").replace("_", " - ");
+                String a = music_name.substring(0, 1).toUpperCase() + music_name.substring(1);
+                String b = music_name.substring(a.lastIndexOf("-") + 2, a.indexOf("-") + 3);
+                music_name = a.replace(b, b.toUpperCase());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void resizeImg() {

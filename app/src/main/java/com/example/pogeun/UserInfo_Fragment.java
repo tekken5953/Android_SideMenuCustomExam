@@ -28,6 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -68,8 +69,8 @@ public class UserInfo_Fragment extends Fragment {
         user_id_info = getActivity().findViewById(R.id.user_id_info);
         user_email_info = getActivity().findViewById(R.id.user_email_info);
         user_id_info.setText(path);
-        getUserValue("이메일",user_email_info);
-        getUserValue("닉네임",user_name_info);
+        getUserValue("이메일", user_email_info);
+        getUserValue("닉네임", user_name_info);
         final TextView text = getActivity().findViewById(R.id.back_main);
         final ImageButton edit_btn = getActivity().findViewById(R.id.edit_user_info);
         final Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
@@ -99,8 +100,8 @@ public class UserInfo_Fragment extends Fragment {
                 final TextView edited_email = view.findViewById(R.id.edited_email);
                 final ImageView edited_profile = view.findViewById(R.id.edited_profile);
                 final ImageView edited_back = view.findViewById(R.id.edited_back);
-                getUserValue("닉네임",edited_name);
-                getUserValue("이메일",edited_email);
+                getUserValue("닉네임", edited_name);
+                getUserValue("이메일", edited_email);
 
                 edited_name.setText(user_name_info.getText().toString());
                 edited_email.setText(user_email_info.getText().toString());
@@ -303,11 +304,9 @@ public class UserInfo_Fragment extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    loagind_Dialog.dismiss();
                     // View갱신
                     toastMsg("계정정보 변경 완료");
-                    Log.e("asd", myRef.child(getActivity().getIntent().getExtras().getString("user_id"))
-                            .getKey());
+                    loagind_Dialog.dismiss();
                 }
             }, 1500);
         }
@@ -326,16 +325,17 @@ public class UserInfo_Fragment extends Fragment {
         toast.show();
     }
 
-    public void getUserValue(final String s, final TextView textView){
+    public void getUserValue(final String s, final TextView textView) {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try{
+                try {
                     textView.setText(snapshot.child(path).child(s).getValue().toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

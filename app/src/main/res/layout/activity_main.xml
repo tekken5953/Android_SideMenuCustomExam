@@ -56,6 +56,15 @@
             android:id="@+id/back_main"
             android:layout_below="@+id/rl_001"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backpress"
+            android:layout_below="@+id/rl_001"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:id="@+id/recycle_back"/>
+
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
@@ -64,7 +73,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_below="@+id/back_main"
+            android:layout_below="@+id/recycle_back"
             android:layout_above="@+id/navigationView"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

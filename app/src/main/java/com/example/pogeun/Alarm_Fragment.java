@@ -39,6 +39,7 @@ public class Alarm_Fragment extends Fragment {
         delete = getActivity().findViewById(R.id.alarm_delete);
 
         getActivity().findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 //TODO
