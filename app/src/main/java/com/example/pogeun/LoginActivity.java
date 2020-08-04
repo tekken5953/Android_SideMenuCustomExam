@@ -1,37 +1,40 @@
 package com.example.pogeun;
 
-        import androidx.annotation.NonNull;
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.annotation.SuppressLint;
-        import android.app.AlertDialog;
-        import android.app.ProgressDialog;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.os.Handler;
-        import android.os.Message;
-        import android.text.SpannableString;
-        import android.text.style.UnderlineSpan;
-        import android.view.Gravity;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.inputmethod.InputMethodManager;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-        import java.util.Date;
-        import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.title_color));
 
         TextView miss_pwd = findViewById(R.id.miss_pwd);
-        Button sign_up = findViewById(R.id.sign_up);
+        final Button sign_up = findViewById(R.id.sign_up);
         Button log_in_btn = findViewById(R.id.login_btn);
         SpannableString content = new SpannableString(miss_pwd.getText().toString());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
@@ -67,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                     //찾고자 하는 ID값은 key로 존재하는 값
                                     if (Objects.equals(dataSnapshot.getKey(), user_id.getText().toString())) {
@@ -119,36 +121,43 @@ public class LoginActivity extends AppCompatActivity {
                 sign_up_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        myRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                if (sign_up_id.getText().toString().equals(snapshot.getKey())) {
-                                    toastMsg("이미 존재하는 아이디 입니다.");
-                                    myRef.removeEventListener(this);
-                                    sign_up_id.setText("");
-                                    sign_up_pwd.setText("");
-                                    keyboardUp(sign_up_id);
-                                } else if (sign_up_id.getText().toString().equals("")) {
-                                    toastMsg("아이디를 입력해주세요.");
-                                    keyboardUp(sign_up_id);
-                                } else if (sign_up_pwd.getText().toString().equals("")) {
-                                    toastMsg("비밀번호를 입력해주세요.");
-                                    keyboardUp(sign_up_pwd);
-                                } else {
-                                    Date date = new Date(System.currentTimeMillis()); //날짜
-
-                                    myRef.child(sign_up_id.getText().toString()).child("가입일").setValue(date.toString());
-                                    myRef.child(sign_up_id.getText().toString()).child("비밀번호").setValue(sign_up_pwd.getText().toString());
-                                    myRef.child(sign_up_id.getText().toString()).child("이메일").setValue(sign_up_email.getText().toString());
-                                    //users를 가리키는 기본 참조에서 시작 -> child(Id를 key로 가지는 자식) ->child("가입일 이라는 key를 갖는 자식")의 value를 날짜로 저장
-
-                                    toastMsg("가입을 완료했습니다.\n해당 아이디로 로그인이 가능합니다.");
+                                try {
+                                    if (snapshot.child(sign_up_id.getText().toString()).exists()) {
+                                        myRef.removeEventListener(this);
+                                        sign_up_id.setText("");
+                                        sign_up_pwd.setText("");
+                                        keyboardUp(sign_up_id);
+                                        toastMsg("이미 존재하는 아이디 입니다.");
+                                    } else if (sign_up_id.getText().toString().equals("")) {
+                                        toastMsg("아이디를 입력해주세요.");
+                                        keyboardUp(sign_up_id);
+                                    } else if (sign_up_pwd.getText().toString().equals("")) {
+                                        toastMsg("비밀번호를 입력해주세요.");
+                                        keyboardUp(sign_up_pwd);
+                                    } else {
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+                                        Calendar calendar = Calendar.getInstance();
+                                        calendar.setTimeInMillis(System.currentTimeMillis());
+                                        myRef.child(sign_up_id.getText().toString()).child("가입일").setValue(simpleDateFormat.format(calendar.getTime()));
+                                        myRef.child(sign_up_id.getText().toString()).child("비밀번호").setValue(sign_up_pwd.getText().toString());
+                                        myRef.child(sign_up_id.getText().toString()).child("이메일").setValue(sign_up_email.getText().toString());
+                                        //users를 가리키는 기본 참조에서 시작 -> child(Id를 key로 가지는 자식)
+                                        // -> child("가입일 이라는 key를 갖는 자식")의 value를 날짜로 저장
+                                        toastMsg("가입을 완료했습니다.\n해당 아이디로 로그인이 가능합니다.");
+                                        //키보드 내리기
+                                        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                                        assert imm != null;
+                                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                        myRef.removeEventListener(this);
+                                        alertDialog.dismiss();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    toastMsg("알수없는 오류가 발생했습니다.\n다시 시도해주세요.");
                                     alertDialog.dismiss();
-                                    //키보드 내리기
-                                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                                    assert imm != null;
-                                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                                 }
                             }
 
