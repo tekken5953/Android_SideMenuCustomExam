@@ -16,12 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -29,8 +30,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Option_Fragment fragment4 = new Option_Fragment();
     private UserInfo_Fragment fragment5 = new UserInfo_Fragment();
     private BottomNavigationView bottomNavigationView;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference myRef = database.getReference("User Login");
 
     RelativeLayout add_layout1, add_layout2, add_layout3;
     ImageView add_btn1, add_btn2, add_btn3, share, option, user_icon;
@@ -112,6 +119,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         user_icon = findViewById(R.id.user_icon);
         back_main = findViewById(R.id.back_main);
         log_out = findViewById(R.id.log_out);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.child(getIntent().getExtras().getString("user_id")).child("닉네임").exists()) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.make_name, null, false);
+                    builder.setView(view);
+                    final AlertDialog alertDialog = builder.create();
+                    final EditText make_name_edit = view.findViewById(R.id.make_name_edit);
+                    final Button make_name_btn = view.findViewById(R.id.make_name_btn);
+                    make_name_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myRef.child(getIntent().getExtras().getString("user_id")).child("닉네임").setValue(make_name_edit.getText().toString());
+                            toastMsg("닉네임 설정 완료");
+                            alertDialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,12 +310,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestart() {
         super.onRestart();
         if (back_main.getText().toString().equals("music")) {
-            currentFragment(fragment2,R.id.bottom_music);
-        }else if (back_main.getText().toString().equals("user_info")){
-            currentFragment(fragment5,R.id.bottom_option);
-        }
-        else {
-            currentFragment(fragment1,R.id.bottom_home);
+            currentFragment(fragment2, R.id.bottom_music);
+        } else if (back_main.getText().toString().equals("user_info")) {
+            currentFragment(fragment5, R.id.bottom_option);
+        } else {
+            currentFragment(fragment1, R.id.bottom_home);
         }
     }
 
@@ -305,6 +339,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewLayout.setVisibility(View.VISIBLE);
         viewLayout.setEnabled(true);
         mainLayout.setEnabled(false);
+        TextView side_name = findViewById(R.id.side_user_name);
+        getUserValue("닉네임",side_name);
     }
 
     public void currentFragment(Fragment frag, int id) {
@@ -322,7 +358,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        currentFragment(fragment5,R.id.bottom_option);
+        currentFragment(fragment5, R.id.bottom_option);
     }
 
     public void toastMsg(String s) {
@@ -339,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private ProgressDialog loading_Dialog; // Loading Dialog
+
     void createThreadAndDialog() {
         /* ProgressDialog */
         loading_Dialog = ProgressDialog.show(MainActivity.this, null,
@@ -354,8 +391,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         thread.start();
     }
 
-    private Handler handler = new  Handler() {
-        public void  handleMessage(Message msg) {
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -366,7 +403,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     finish();
                     toastMsg("로그아웃 하셨습니다.\n다시 로그인 해주세요.");
                 }
-            },2000);
+            }, 2000);
         }
     };
+
+    public void getUserValue(final String s, final TextView textView){
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    textView.setText(snapshot.child(getIntent().getExtras().getString("user_id")).child(s).getValue().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 }

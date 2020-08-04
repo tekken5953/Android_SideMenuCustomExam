@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,18 +53,25 @@ public class UserInfo_Fragment extends Fragment {
     ImageView user_info_ring, user_info_back;
     String back_main = "user_info";
     TextView user_name_info, user_id_info, user_email_info;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference myRef = database.getReference("User Login");
+    String path = null;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        path = getActivity().getIntent().getExtras().getString("user_id");
         user_info_ring = viewGroup.findViewById(R.id.user_icon_ring);
         user_info_back = viewGroup.findViewById(R.id.user_back_ring);
         user_name_info = getActivity().findViewById(R.id.user_name_info);
         user_id_info = getActivity().findViewById(R.id.user_id_info);
         user_email_info = getActivity().findViewById(R.id.user_email_info);
+        user_id_info.setText(path);
+        getUserValue("이메일",user_email_info);
+        getUserValue("닉네임",user_name_info);
         final TextView text = getActivity().findViewById(R.id.back_main);
-        ImageButton edit_btn = getActivity().findViewById(R.id.edit_user_info);
+        final ImageButton edit_btn = getActivity().findViewById(R.id.edit_user_info);
         final Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
         final Animation fade_out = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
         user_info_ring.setBackground(new ShapeDrawable(new OvalShape()));
@@ -70,29 +83,26 @@ public class UserInfo_Fragment extends Fragment {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.edit_user_info, null, false);
                 builder.setView(view);
                 final AlertDialog alertDialog = builder.create();
-                final Button edit_cancel_btn = view.findViewById(R.id.edit_finish_btn);
+                final Button edit_finish_btn = view.findViewById(R.id.edit_finish_btn);
+                final Button edit_cancel_btn = view.findViewById(R.id.edit_cancel_btn);
                 final ImageView edit_name = view.findViewById(R.id.edit_name_btn);
-                final ImageView edit_id = view.findViewById(R.id.edit_id_btn);
                 final ImageView edit_email = view.findViewById(R.id.edit_email_btn);
                 final ImageView edit_profile = view.findViewById(R.id.edit_profile_btn);
                 final ImageView edit_back = view.findViewById(R.id.edit_back_btn);
                 final EditText edit_name_edit = view.findViewById(R.id.edit_name);
-                final EditText edit_id_edit = view.findViewById(R.id.edit_id);
                 final EditText edit_email_edit = view.findViewById(R.id.edit_email);
                 final ImageView name_ok = view.findViewById(R.id.name_ok);
                 final ImageView name_no = view.findViewById(R.id.name_no);
-                final ImageView id_ok = view.findViewById(R.id.id_ok);
-                final ImageView id_no = view.findViewById(R.id.id_no);
                 final ImageView email_ok = view.findViewById(R.id.email_ok);
                 final ImageView email_no = view.findViewById(R.id.email_no);
                 final TextView edited_name = view.findViewById(R.id.edited_name);
-                final TextView edited_id = view.findViewById(R.id.edited_id);
                 final TextView edited_email = view.findViewById(R.id.edited_email);
                 final ImageView edited_profile = view.findViewById(R.id.edited_profile);
                 final ImageView edited_back = view.findViewById(R.id.edited_back);
+                getUserValue("닉네임",edited_name);
+                getUserValue("이메일",edited_email);
 
                 edited_name.setText(user_name_info.getText().toString());
-                edited_id.setText(user_id_info.getText().toString());
                 edited_email.setText(user_email_info.getText().toString());
 
                 if (resizedBmp != null) {
@@ -105,8 +115,14 @@ public class UserInfo_Fragment extends Fragment {
                     edited_back.setClipToOutline(true);
                     edited_back.setImageBitmap(resizedBmp2);
                 }
-
                 edit_cancel_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                edit_finish_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         createThreadAndDialog();
@@ -114,7 +130,6 @@ public class UserInfo_Fragment extends Fragment {
                     }
                 });
                 fadeAnimaion("닉네임", edit_name, name_ok, name_no, edit_name_edit, edited_name, fade_in, fade_out, user_name_info);
-                fadeAnimaion("아이디", edit_id, id_ok, id_no, edit_id_edit, edited_id, fade_in, fade_out, user_id_info);
                 fadeAnimaion("이메일", edit_email, email_ok, email_no, edit_email_edit, edited_email, fade_in, fade_out, user_email_info);
 
                 edit_profile.setOnClickListener(new View.OnClickListener() {
@@ -186,8 +201,9 @@ public class UserInfo_Fragment extends Fragment {
                         editText.setVisibility(View.GONE);
                         no.setVisibility(View.GONE);
                         ok.setVisibility(View.GONE);
-                        text.setText(editText.getText().toString());
                         textView.setText(editText.getText().toString());
+                        myRef.child(getActivity().getIntent().getExtras().getString("user_id"))
+                                .child(s).setValue(editText.getText().toString());
                         //키보드 내리기
                         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
                         assert imm != null;
@@ -227,10 +243,9 @@ public class UserInfo_Fragment extends Fragment {
                     InputStream in = Objects.requireNonNull(getActivity()).getContentResolver().openInputStream(data.getData());
                     Bitmap img = BitmapFactory.decodeStream(in);
                     //selected Image`s size is bigger than imginfo`s one
-                    if (img.getWidth() > 200 || img.getHeight() > 200){
+                    if (img.getWidth() > 200 || img.getHeight() > 200) {
                         resizedBmp = Bitmap.createScaledBitmap(img, (int) 200, (int) 200, true);
                     }
-
                     assert in != null;
                     in.close();
                     img1.setImageBitmap(resizedBmp);
@@ -267,6 +282,7 @@ public class UserInfo_Fragment extends Fragment {
     }
 
     private ProgressDialog loagind_Dialog; // Loading Dialog
+
     void createThreadAndDialog() {
         /* ProgressDialog */
         loagind_Dialog = ProgressDialog.show(getContext(), null,
@@ -282,16 +298,18 @@ public class UserInfo_Fragment extends Fragment {
         thread.start();
     }
 
-    private Handler handler = new  Handler() {
-        public void  handleMessage(Message msg) {
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     loagind_Dialog.dismiss();
                     // View갱신
                     toastMsg("계정정보 변경 완료");
+                    Log.e("asd", myRef.child(getActivity().getIntent().getExtras().getString("user_id"))
+                            .getKey());
                 }
-            },1500);
+            }, 1500);
         }
     };
 
@@ -306,5 +324,21 @@ public class UserInfo_Fragment extends Fragment {
         toast.setView(layout);
         text.setText(s);
         toast.show();
+    }
+
+    public void getUserValue(final String s, final TextView textView){
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    textView.setText(snapshot.child(path).child(s).getValue().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

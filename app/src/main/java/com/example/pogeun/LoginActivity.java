@@ -2,7 +2,6 @@ package com.example.pogeun;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -14,7 +13,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,22 +22,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference myRef = database.getReference("User Login");
+    EditText user_id, user_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         miss_pwd.setText(content);
 
-        final EditText user_id = findViewById(R.id.login_edit_id);
-        final EditText user_pwd = findViewById(R.id.login_edit_pwd);
+        user_id = findViewById(R.id.login_edit_id);
+        user_pwd = findViewById(R.id.login_edit_pwd);
         log_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,22 +65,19 @@ public class LoginActivity extends AppCompatActivity {
                         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                    //찾고자 하는 ID값은 key로 존재하는 값
-                                    if (Objects.equals(dataSnapshot.getKey(), user_id.getText().toString())) {
-                                        try {
-                                            if (Objects.equals(dataSnapshot.child("비밀번호").getValue(), user_pwd.getText().toString())) {
-                                                createThreadAndDialog();
-                                                return;
-                                            } else {
-                                                toastMsg("비밀번가 일치하지 않습니다.");
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
+
+                                //찾고자 하는 ID값은 key로 존재하는 값
+                                if (snapshot.child(user_id.getText().toString()).exists()) {
+                                    if (snapshot.child(user_id.getText().toString()).child("비밀번호").getValue().equals(user_pwd.getText().toString())) {
+                                        createThreadAndDialog();
+                                    } else {
+                                        toastMsg("비밀번가 일치하지 않습니다.");
+                                        myRef.removeEventListener(this);
                                     }
+                                } else {
+                                    myRef.removeEventListener(this);
+                                    toastMsg("존재하지 않는 아이디입니다.");
                                 }
-                                toastMsg("존재하지 않는 아이디입니다.");
                             }
 
                             @Override
@@ -126,11 +118,11 @@ public class LoginActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 try {
                                     if (snapshot.child(sign_up_id.getText().toString()).exists()) {
-                                        myRef.removeEventListener(this);
                                         sign_up_id.setText("");
                                         sign_up_pwd.setText("");
                                         keyboardUp(sign_up_id);
                                         toastMsg("이미 존재하는 아이디 입니다.");
+                                        myRef.removeEventListener(this);
                                     } else if (sign_up_id.getText().toString().equals("")) {
                                         toastMsg("아이디를 입력해주세요.");
                                         keyboardUp(sign_up_id);
@@ -151,9 +143,9 @@ public class LoginActivity extends AppCompatActivity {
                                         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                                         assert imm != null;
                                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                                        myRef.removeEventListener(this);
                                         alertDialog.dismiss();
                                     }
+                                    myRef.removeEventListener(this);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     toastMsg("알수없는 오류가 발생했습니다.\n다시 시도해주세요.");
@@ -225,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                     loading_Dialog.dismiss();
                     // View갱신
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("user_id", user_id.getText().toString());
                     startActivity(intent);
                     finish();
                     toastMsg("접속에 성공했습니다. 안녕하세요 :)");
