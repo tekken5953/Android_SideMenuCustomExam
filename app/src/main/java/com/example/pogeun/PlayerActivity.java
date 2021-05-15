@@ -196,7 +196,7 @@ public class PlayerActivity extends AppCompatActivity {
     public void translateText() {
         music_name = fields[count].getName();
         try {
-            if (music_name.startsWith(genre)) {
+            if (music_name.startsWith("pop") || music_name.startsWith("classic")) {
                 int i = music_name.indexOf("_");
                 String s = music_name.substring(0, i + 1);
                 music_name = music_name.replaceFirst(s, "");

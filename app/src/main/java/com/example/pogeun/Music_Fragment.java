@@ -28,7 +28,7 @@ public class Music_Fragment extends Fragment {
     ArrayList<RecyclerItem> mList = new ArrayList<RecyclerItem>();
     final Field[] fields = R.raw.class.getFields();
     int imgID = 0;
-    String music_name, music_singer, genre;
+    String music_name, music_singer,mn;
     Bitmap bitmap;
     Drawable drawable, drawable_category1, drawable_category2;
     float height = 100;
@@ -63,6 +63,7 @@ public class Music_Fragment extends Fragment {
                         mRecyclerView.setAdapter(mAdapter);
                         restictitem("pop_");
                         back.setVisibility(View.VISIBLE);
+                        selected();
                         break;
                     case 1:
                         mList.clear();
@@ -70,6 +71,7 @@ public class Music_Fragment extends Fragment {
                         mRecyclerView.setAdapter(mAdapter);
                         restictitem("classic");
                         back.setVisibility(View.VISIBLE);
+                        selected();
                         break;
                 }
             }
@@ -85,15 +87,6 @@ public class Music_Fragment extends Fragment {
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View v, int position) {
-//                Intent intent = new Intent(getActivity(), PlayerActivity.class);
-//                intent.putExtra("index", position);
-//                intent.putExtra("genre",genre);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
@@ -149,6 +142,17 @@ public class Music_Fragment extends Fragment {
         assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
+    }
+    public void selected(){
+        mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                intent.putExtra("index", position);
+                intent.putExtra("genre", mn);
+                startActivity(intent);
+            }
+        });
     }
 
     public void addItem(Drawable icon, String title, String desc) {

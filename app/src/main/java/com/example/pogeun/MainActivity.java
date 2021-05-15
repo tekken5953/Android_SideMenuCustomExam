@@ -375,22 +375,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private ProgressDialog loading_Dialog; // Loading Dialog
-
-    void createThreadAndDialog() {
-        /* ProgressDialog */
-        loading_Dialog = ProgressDialog.show(MainActivity.this, null,
-                "변경사항을 저장 중 입니다..", true, false);
-
-
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                // 시간걸리는 처리
-                handler.sendEmptyMessage(0);
-            }
-        });
-        thread.start();
-    }
-
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             new Handler().postDelayed(new Runnable() {
@@ -406,6 +390,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }, 2000);
         }
     };
+
+    void createThreadAndDialog() {
+        /* ProgressDialog */
+        loading_Dialog = ProgressDialog.show(MainActivity.this, null,
+                "변경사항을 저장 중 입니다..", true, false);
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                // 시간걸리는 처리
+                handler.sendEmptyMessage(0);
+            }
+        });
+        thread.start();
+    }
+
+
 
     public void getUserValue(final String s, final TextView textView){
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
